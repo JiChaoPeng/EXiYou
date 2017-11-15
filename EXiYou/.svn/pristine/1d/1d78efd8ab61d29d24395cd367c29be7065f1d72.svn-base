@@ -1,0 +1,18 @@
+package jcp.com.exiyou.ui.shoppingmall.bean;
+
+/**
+ * Created by 周强 on 2017/3/30.
+ */
+
+public class ShopSearchListBean {
+
+    private ShopSearchBean data;
+
+    public ShopSearchBean getData() {
+        return data;
+    }
+
+    public void setData(ShopSearchBean data) {
+        this.data = data;
+    }
+}

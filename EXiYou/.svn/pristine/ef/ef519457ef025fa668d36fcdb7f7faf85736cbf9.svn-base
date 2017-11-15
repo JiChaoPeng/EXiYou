@@ -1,0 +1,32 @@
+package jcp.com.exiyou.ui.community.presenter;
+
+import jcp.com.exiyou.ui.community.bean.RecommendDataBean;
+import jcp.com.exiyou.ui.community.contract.RecommendContract;
+import rx.Observer;
+
+/**
+ * Created by SweetDream on 2017/3/25.
+ */
+
+public class RecommendPresenter extends RecommendContract.Presenter {
+    @Override
+    public void getRecommendRes(int page) {
+        mModel.getRecommendRes(page)
+                .subscribe(new Observer<RecommendDataBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.onError("errorInfo:" + e.getCause());
+                    }
+
+                    @Override
+                    public void onNext(RecommendDataBean recommendDataBean) {
+                        mView.returnRecommendRes(recommendDataBean);
+                    }
+                });
+    }
+}

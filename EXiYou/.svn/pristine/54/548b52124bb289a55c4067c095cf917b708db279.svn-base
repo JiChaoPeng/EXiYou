@@ -1,0 +1,45 @@
+package jcp.com.exiyou.ui.shoppingmall.contract;
+
+import jcp.com.exiyou.base.base.BaseModel;
+import jcp.com.exiyou.base.base.BasePresenter;
+import jcp.com.exiyou.base.base.BaseView;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListHotGoods;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSpecialListBean;
+import rx.Observable;
+
+/**
+ * Created by 周强 on 2017/3/27.
+ */
+
+public interface ShopContract {
+
+    public abstract class ShopPresenter extends BasePresenter<ShopModel,ShopView> {
+        public abstract void getShopRes(int page);
+        public abstract void getShopHeaderRes();
+    }
+
+    public interface ShopModel extends BaseModel {
+
+        Observable<ShopListHotGoods> getShopRes1(int page);
+        Observable<ShopListBean> getShopHeaderRes1();
+    }
+
+    public interface ShopView extends BaseView {
+        void returnShopData(ShopListHotGoods data);
+        void retrunShopHeaderRes(ShopListBean data);
+    }
+
+    public abstract class ShopSpecialPresenter extends BasePresenter<ShopSpecialModel,ShopSpecialView> {
+        public abstract void getShopSpecialRes(String type);
+
+    }
+
+    public interface ShopSpecialModel extends BaseModel {
+        Observable<ShopSpecialListBean> getShopSpecialRes(String type);
+    }
+
+    public interface ShopSpecialView extends BaseView, BaseModel {
+        void returnShopSpecialData(ShopSpecialListBean data);
+    }
+}

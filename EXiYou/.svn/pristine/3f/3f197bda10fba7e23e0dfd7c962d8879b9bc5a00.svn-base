@@ -1,0 +1,35 @@
+package jcp.com.exiyou.ui.shoppingmall.presenter;
+
+import android.util.Log;
+
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListBean;
+import jcp.com.exiyou.ui.shoppingmall.contract.ShopContract;
+import rx.Observer;
+
+/**
+ * Created by 周强 on 2017/3/27.
+ */
+
+public class ShopPresenter extends ShopContract.ShopPresenter {
+
+    private static final String TAG = ShopPresenter.class.getSimpleName();
+
+    @Override
+    public void getShopRes() {
+        mModel.getShopRes().subscribe(new Observer<ShopListBean>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.onError("errorInfo:");
+            }
+
+            @Override
+            public void onNext(ShopListBean shopListBean) {
+                mView.returnShopData(shopListBean);
+            }
+        });
+    }
+}

@@ -1,0 +1,19 @@
+package jcp.com.exiyou.ui.community.model;
+
+import jcp.com.exiyou.base.event.AndroidIOToMain;
+import jcp.com.exiyou.ui.community.bean.RecommendDataBean;
+import jcp.com.exiyou.ui.community.contract.RecommendContract;
+import rx.Observable;
+
+/**
+ * Created by SweetDream on 2017/3/25.
+ */
+
+public class RecommendModel implements RecommendContract.Model {
+
+    @Override
+    public Observable<RecommendDataBean> getRecommendRes(int page) {
+        return getRecommendRes(page)
+                .compose(new AndroidIOToMain.IOToMainTransformer<RecommendDataBean>());
+    }
+}

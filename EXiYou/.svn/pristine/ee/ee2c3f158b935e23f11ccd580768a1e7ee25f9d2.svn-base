@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:cardCornerRadius="6dp"-->
+        <!--app:cardElevation="3dp"-->
+        <!--app:cardBackgroundColor="#fff"-->
+        <!--app:contentPadding="5dp">-->
+        <GridView
+            android:id="@+id/fragment_shoppage_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="2">
+
+        </GridView>
+    <!--</android.support.v7.widget.CardView>-->
+</RelativeLayout>

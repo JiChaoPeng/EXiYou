@@ -1,0 +1,28 @@
+package jcp.com.exiyou.ui.community.contract;
+
+import jcp.com.exiyou.base.base.BaseModel;
+import jcp.com.exiyou.base.base.BasePresenter;
+import jcp.com.exiyou.base.base.BaseView;
+import jcp.com.exiyou.ui.community.bean.enterintojump.ItemBean;
+import jcp.com.exiyou.ui.community.bean.enterintojump.ItemDataBean;
+import rx.Observable;
+
+/**
+ * Created by SweetDream on 2017/3/30.
+ */
+
+public interface EnterIntoTitleContract {
+
+    abstract class Presenter extends BasePresenter<Model, View> {
+        public abstract void requestEnterIntoTitleRes(int fid);
+    }
+
+    interface Model extends BaseModel {
+        Observable<ItemBean> getEnterIntoTitleRes(int fid);
+    }
+
+    interface View extends BaseView {
+        void returnEnterIntoTitleRes(ItemDataBean itemDataBean);
+    }
+
+}

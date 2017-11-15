@@ -1,0 +1,104 @@
+package jcp.com.exiyou.ui.shoppingmall.adapter;
+
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopBean;
+
+/**
+ * Created by 周强 on 2017/3/27.
+ */
+
+public class ShopGridViewAdapter extends BaseAdapter{
+
+    private static final String TAG = ShopGridViewAdapter.class.getSimpleName();
+
+    private List<ShopBean.ShopHotGoods> data;
+    private Context context;
+    private LayoutInflater inflater;
+
+    public ShopGridViewAdapter(Context context,List<ShopBean.ShopHotGoods> data) {
+        this.data = data;
+        this.context = context;
+        this.inflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public int getCount() {
+        Log.e(TAG, "getCount: " + data.size());
+        return data!=null?data.size():0;
+    }
+    @Override
+    public Object getItem(int position) {
+        return data.get(position);
+    }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
+        if(convertView!=null){
+            holder = (ViewHolder) convertView.getTag();
+        }else {
+            convertView = LayoutInflater.from(context).inflate(R.layout.shoppage_gridview_item, null);
+            holder = new ViewHolder(convertView);
+
+            convertView.setTag(holder);
+        }
+
+        Log.e(TAG, "getView: " + data.get(position).getTitle() );
+        holder.setText(R.id.shoppage_gridview_title,data.get(position).getTitle());
+        holder.setText(R.id.shoppage_gridview_price,data.get(position).getPrice());
+        holder.setText(R.id.shoppage_gridview_status,data.get(position).getStatus());
+
+        Picasso.with(context)
+                .load(data.get(position).getPhoto())
+                .into(holder.getImageView(R.id.shoppage_gridview_image));
+
+        return convertView;
+    }
+
+    private class ViewHolder{
+        private View initView;
+        private Map<Integer, View> cacheViews;
+        public ViewHolder(View initView){
+            this.initView = initView;
+            cacheViews = new HashMap<>();
+        }
+        public View findView(int resId){
+            View view = null;
+            if (cacheViews.containsKey(resId)) {
+                view = cacheViews.get(resId);
+            } else {
+                view = initView.findViewById(resId);
+                cacheViews.put(resId, view);
+            }
+            return view;
+        }
+        public void setText(int resId, String text){
+            ((TextView) findView(resId)).setText(text);
+        }
+        public ImageView getImageView(int resId){
+            ImageView imageView = (ImageView) findView(resId);
+            return imageView;
+        }
+
+    }
+
+}

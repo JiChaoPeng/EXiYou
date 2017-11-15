@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_recommend_jump"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="jcp.com.exiyou.ui.community.activitys.RecommendJumpActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@mipmap/main_tablayout_back_img">
+
+        <ImageView
+            android:id="@+id/activity_recommend_jump_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/ic_back_white" />
+
+        <ImageView
+            android:id="@+id/activity_recommend_jump_menu"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/ic_article_menu" />
+
+
+        <ImageView
+            android:id="@+id/activity_recommend_jump_heart"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:layout_toLeftOf="@id/activity_recommend_jump_menu"
+            android:src="@mipmap/ic_heart_white" />
+
+        <ImageView
+            android:id="@+id/activity_recommend_jump_elevate"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:layout_toLeftOf="@id/activity_recommend_jump_heart"
+            android:src="@mipmap/ic_elevater_wite" />
+
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/activity_recommend_jump_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

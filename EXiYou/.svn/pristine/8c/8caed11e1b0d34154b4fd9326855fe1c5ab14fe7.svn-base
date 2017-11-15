@@ -1,0 +1,25 @@
+package jcp.com.exiyou.ui.community.fragment;
+
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.base.base.BaseFragment;
+
+/**
+ * Created by SweetDream on 2017/3/27.
+ */
+
+public class EnterIntoFragment extends BaseFragment {
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_enter_into;
+    }
+
+    @Override
+    public void initPresenter() {
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
+}

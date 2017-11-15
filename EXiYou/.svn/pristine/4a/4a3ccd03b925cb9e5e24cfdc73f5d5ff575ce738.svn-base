@@ -1,0 +1,161 @@
+package jcp.com.exiyou.ui.shoppingmall.activity;
+
+import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseActivity;
+import jcp.com.exiyou.base.util.LoadAnimation;
+import jcp.com.exiyou.ui.shoppingmall.adapter.ShopSearchListAdapter;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchListBean;
+import jcp.com.exiyou.ui.shoppingmall.contract.ShopContract;
+import jcp.com.exiyou.ui.shoppingmall.model.ShopSearchModel;
+import jcp.com.exiyou.ui.shoppingmall.presenter.ShopSearchPresenter;
+
+public class ShopSearchListActivity extends BaseActivity<ShopSearchPresenter,ShopSearchModel> implements ShopContract.ShopSearchView, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+
+    private static final String TAG = ShopSearchListActivity.class.getSimpleName();
+    private ShopSearchListAdapter adapter;
+
+    @OnClick(R2.id.shoppage_select_title1)
+    public void selectTitle1(){
+
+    }
+
+    @OnClick(R2.id.shoppage_select_title2)
+    public void selectTitle2(){
+
+    }
+
+    @OnClick(R2.id.shoppage_select_title3)
+    public void selectTitle3(){
+
+    }
+
+    @BindView(R2.id.shoppage_style_listview)
+    ListView mListView;
+
+    @OnClick(R2.id.shoppage_style_back)
+    public void styleBack(){
+        this.finish();
+    }
+
+    @BindView(R2.id.shoppage_style_title)
+    TextView mBarTitle;
+    @BindView(R2.id.shoppage_style_swiperefreshlayout)
+    SwipeRefreshLayout mRefresh;
+
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_shop_style_one;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setMV(mModel,this);
+    }
+
+    private int page = 1;
+    private boolean isUpdate = true;
+    private String stg_id;
+    private View footer;
+
+    @Override
+    public void initView() {
+        //请求数据,获取返回的listview中的数据,加载数据
+        //下拉加载与上拉刷新的添加
+        //条件筛选的级联列表的添加
+
+        Intent intent = getIntent();
+        stg_id = intent.getStringExtra("stg_id");
+        String title = intent.getStringExtra("title");
+        mBarTitle.setText(title);
+
+        //初始化swipeRefreshLayout
+        mRefresh.setColorSchemeResources(R.color.color_green_tab);
+        mRefresh.setOnRefreshListener(this);
+        //请求数据
+        mPresenter.getShopSearchRes(stg_id,String.valueOf(page));
+        //添加尾布局
+        footer = LayoutInflater.from(this).inflate(R.layout.recommend_footer, null);
+        mListView.addFooterView(footer);
+        footer.setVisibility(View.GONE);
+
+        adapter = new ShopSearchListAdapter(this,null,listData, R.layout.shoppage_search_list_item);
+        mListView.setAdapter(adapter);
+        mListView.setOnScrollListener(this);
+    }
+
+    List<ShopSearchBean.ShopSearchList> listData = new ArrayList<>();
+    @Override
+    public void returnShopSearchListData(ShopSearchListBean data) {
+//        Log.e(TAG, "returnShopSearchListData: " + data.getData().toString());
+        mRefresh.setRefreshing(false);
+
+        if(isUpdate) {
+            Toast.makeText(this, "刷新完成", Toast.LENGTH_SHORT).show();
+            adapter.updateRes(data.getData().getList());
+        }else{
+            Toast.makeText(this, "加载完成", Toast.LENGTH_SHORT).show();
+            adapter.addRes(data.getData().getList());
+            footer.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void OnStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
+    }
+
+
+    @Override
+    public void onRefresh() {
+        page = 1;
+        isUpdate = true;
+        mPresenter.getShopSearchRes(stg_id,String.valueOf(page));
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        switch (scrollState){
+            case SCROLL_STATE_IDLE:
+                if (isBottom) {
+                    footer.setVisibility(View.VISIBLE);
+                    LoadAnimation.LoadingAnimation(footer, true);
+                    isUpdate = false;
+                    mPresenter.getShopSearchRes(stg_id, String.valueOf(++page));
+                }
+            break;
+        }
+    }
+
+    private boolean isBottom;
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        isBottom = firstVisibleItem + visibleItemCount == totalItemCount;
+    }
+}

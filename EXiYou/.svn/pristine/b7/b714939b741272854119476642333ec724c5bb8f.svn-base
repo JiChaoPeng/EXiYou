@@ -1,0 +1,60 @@
+package jcp.com.exiyou.base.util;
+
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import jcp.com.exiyou.R;
+
+/**
+ * Created by SweetDream on 2017/3/28.
+ */
+
+public class LoadAnimation {
+    private static ImageView circle, needle;
+    private static TextView textView;
+//    private static boolean isLoading;
+    private static RotateAnimation rotateAnimation;
+    private static ScaleAnimation scaleAnimation;
+
+    public static void LoadingAnimation(View footer, boolean loadingState) {
+        do {
+            if (circle != null && needle != null && textView != null) {
+                if (rotateAnimation != null && scaleAnimation != null) {
+                    rotateAnimation.setRepeatMode(Animation.RESTART);
+                    rotateAnimation.setRepeatCount(-1);
+                    rotateAnimation.setDuration(1000);
+                    scaleAnimation.setRepeatMode(Animation.REVERSE);
+                    scaleAnimation.setRepeatCount(-1);
+                    scaleAnimation.setDuration(500);
+                    if (loadingState) {
+                        textView.setText("正在玩命加载中...");
+                        needle.startAnimation(rotateAnimation);
+                        circle.startAnimation(scaleAnimation);
+                        loadingState = !loadingState;
+                    } else {
+                        textView.setText("网络加载失败...");
+                        rotateAnimation.cancel();
+                        scaleAnimation.cancel();
+                        loadingState = !loadingState;
+                    }
+                } else {
+                    rotateAnimation = new RotateAnimation(0, 360, needle.getWidth() / 2, needle.getHeight() / 2);
+                    scaleAnimation = new ScaleAnimation(1, (float) 0.9, 1, (float) 0.9, circle.getWidth() / 2, circle.getHeight() / 2);
+                }
+            } else {
+                circle = ((ImageView) footer.findViewById(R.id.recommend_foot_yuan_image));
+                needle = ((ImageView) footer.findViewById(R.id.recommend_foot_zhen_image));
+                textView = (TextView) footer.findViewById(R.id.recommend_foot_text);
+            }
+        } while (loadingState);
+
+    }
+
+//    public static void stopLoadingAnimation() {
+//        isLoading = true;
+//    }
+}

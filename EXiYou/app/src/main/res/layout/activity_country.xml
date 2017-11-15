@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/color_white">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/country_collapse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/color_green_login"
+            app:expandedTitleMarginStart="50dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/country_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v4.view.ViewPager>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/country_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_collapseMode="pin"
+                app:subtitleTextAppearance="@style/Toolbar"
+                app:theme="@style/Toolbar"
+                app:titleTextColor="@color/color_white">
+
+                <ImageView
+                    android:id="@+id/country_back"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/ic_back_white" />
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                app:cardUseCompatPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:id="@+id/country_guide_num"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                android:elevation="10dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="26dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:src="@mipmap/ic_dest_guide" />
+
+                    <TextView
+                        android:id="@+id/country_book"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="6"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/country_book_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="2"
+                        android:textColor="@color/colorGary_6"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="12dp"
+                        android:layout_weight="1"
+                        android:src="@mipmap/ic_user_detail_right_arrow" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="false"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp">
+                <jcp.com.exiyou.ui.countrysite.view.CountryGridView
+                    android:layout_margin="10dp"
+                    android:id="@+id/country_ticket_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="4" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/country_hot_city_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="热门城市"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/country_hot_city_more"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="查看全部"
+                        android:textColor="@color/color_green_login"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <jcp.com.exiyou.ui.countrysite.view.CountryGridView
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/country_hot_city_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="2" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                app:cardUseCompatPadding="false"
+                android:visibility="gone"
+                android:id="@+id/country_card_go"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="超值自由行"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/country_hot_go_more"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="查看全部"
+                        android:textColor="@color/color_green_login"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <jcp.com.exiyou.ui.shoppingmall.view.MyListView
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/country_hot_go_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="right"
+        android:src="@mipmap/ic_poi_map_white"
+        app:layout_anchor="@id/country_toolbar"
+        app:layout_anchorGravity="right" />
+</android.support.design.widget.CoordinatorLayout>

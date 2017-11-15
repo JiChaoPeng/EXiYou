@@ -1,0 +1,40 @@
+package jcp.com.exiyou.ui.splash.model;
+
+import android.support.v4.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import jcp.com.exiyou.constants.UiParams;
+import jcp.com.exiyou.ui.community.fragment.CommunityFragment;
+import jcp.com.exiyou.ui.destination.fragment.DestinationFragment;
+import jcp.com.exiyou.ui.homepage.fragment.HomePageFragment;
+import jcp.com.exiyou.ui.shoppingmall.fragment.ShopFragment;
+import jcp.com.exiyou.ui.splash.contract.MainConstants;
+import jcp.com.exiyou.ui.splash.fragment.TestFragment;
+
+
+public class MainModel implements MainConstants.MainModel {
+
+    public static final String TAG = MainModel.class.getSimpleName();
+
+    @Override
+    public List<String> getTitleList() {
+        List<String> titles = new ArrayList<>();
+        String[] tablayoutTitles = UiParams.MAIN_TABLAYOUT_TITLES;
+        for (String string : tablayoutTitles) {
+            titles.add(string);
+        }
+        return titles;
+    }
+
+    @Override
+    public List<Fragment> getFragmentList() {
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new HomePageFragment());
+        fragments.add(new DestinationFragment());
+        fragments.add(new ShopFragment());
+        fragments.add(new CommunityFragment());
+        return fragments;
+    }
+}

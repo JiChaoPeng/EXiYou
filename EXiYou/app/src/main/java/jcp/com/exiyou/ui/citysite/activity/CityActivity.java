@@ -1,0 +1,260 @@
+package jcp.com.exiyou.ui.citysite.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.media.Image;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseActivity;
+import jcp.com.exiyou.base.util.SharedPreferencesUtils;
+import jcp.com.exiyou.ui.citysite.adapters.CityReadMoreAdapter;
+import jcp.com.exiyou.ui.citysite.adapters.CityTicketAdapter;
+import jcp.com.exiyou.ui.citysite.bean.CitySiteBean;
+import jcp.com.exiyou.ui.citysite.contract.CityContract;
+import jcp.com.exiyou.ui.citysite.model.CityModel;
+import jcp.com.exiyou.ui.citysite.persenter.CityPresenter;
+import jcp.com.exiyou.ui.countrysite.adapters.CounrtryViewPagerAdapter;
+import jcp.com.exiyou.ui.countrysite.adapters.CountryTicketAdapter;
+import jcp.com.exiyou.ui.countrysite.view.CountryGridView;
+import jcp.com.exiyou.ui.shoppingmall.activity.ShopSearchSecondActicity;
+import jcp.com.exiyou.ui.shoppingmall.view.MyListView;
+
+/**
+ * Created by 超鹏 on 2017/4/2.
+ * //                            _ooOoo_
+ * //                           o8888888o
+ * //                           88" . "88
+ * //                           (| -_- |)
+ * //                            O\ = /O
+ * //                        ____/`---'\____
+ * //                      .   ' \\| |// `.
+ * //                       / \\||| : |||// \
+ * //                     / _||||| -:- |||||- \
+ * //                       | | \\\ - /// | |
+ * //                     | \_| ''\---/'' | |
+ * //                      \ .-\__ `-` ___/-. /
+ * //                   ___`. .' /--.--\ `. . __
+ * //                ."" '< `.___\_<|>_/___.' >'"".
+ * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+ * //                 \ \ `-. \_ __\ /__ _/ .-` / /
+ * //         ======`-.____`-.___\_____/___.-`____.-'======
+ * //                            `=---='
+ * //         .............................................
+ * //
+ * //            佛祖镇楼                  BUG辟易
+ * 佛曰:
+ * 写字楼里写字间，写字间里程序员；程序人员写程序，又拿程序换酒钱。酒醒只在网上坐，酒醉还来网下眠；酒醉酒醒日复日，网上网下年复年。
+ * 宁愿老死程序间，只要老板多发钱；小车大房不去想，撰个二千好过年。若要见识新世面，公务员比程序员；一个在天一在地，而且还比我们闲。
+ * 别人看我穿白领，我看别人穿名牌；天生我才写程序，臀大近视肩周炎。年复一年春光度，度得他人做老板；老板扣我薄酒钱，没有酒钱怎过年。
+ * 春光逝去皱纹起，作起程序也委靡；来到水源把水灌，打死不做程序员。别人笑我忒疯癫，我笑他人命太贱；状元三百六十行，偏偏来做程序员。
+ * 但愿老死电脑间，不愿鞠躬老板前；奔驰宝马贵者趣，公交自行程序员。别人笑我忒疯癫，我笑自己命太贱；不见满街漂亮妹，哪个归得程序员。
+ * 不想只挣打工钱，那个老板愿发钱；小车大房咱要想，任我享用多悠闲。比尔能搞个微软，我咋不能捞点钱；一个在天一在地，定有一日乾坤翻。
+ * 我在天来他在地，纵横天下山水间；傲视武林豪杰墓，一樽还垒风月山。电脑面前眼发直，眼镜下面泪茫茫；做梦发财好几亿，从此不用手指忙。
+ * 哪知梦醒手空空，老板看到把我训；待到老时眼发花，走路不知哪是家。小农村里小民房，小民房里小民工；小民工人写程序，又拿代码讨赏钱。
+ * 钱空只在代码中，钱醉仍在代码间；有钱无钱日复日，码上码下年复年。但愿老死代码间，不愿鞠躬奥迪前，奥迪奔驰贵者趣，程序代码贫者缘。
+ * 若将贫贱比贫者，一在平地一在天；若将贫贱比车马，他得驱驰我得闲。别人笑我忒疯癫，我笑他人看不穿；不见盖茨两手间，财权富贵世人鉴。
+ */
+
+public class CityActivity extends BaseActivity<CityPresenter,CityModel> implements CityContract.CityView,
+        ViewPager.OnPageChangeListener ,Handler.Callback, View.OnClickListener, AdapterView.OnItemClickListener {
+    private static final String TAG = CityActivity.class.getSimpleName();
+    @BindView(R2.id.city_viewpager)
+    ViewPager mViewPager;
+    @BindView(R2.id.city_toolbar)
+    Toolbar toolbar;
+    @BindView(R2.id.city_back)
+    ImageView back;
+    @BindView(R2.id.city_book)
+    TextView city_book;
+    @BindView(R2.id.city_book_num)
+    TextView city_book_num;
+    @BindView(R2.id.city_guide_num)
+    CardView cityGuideNum;
+    @BindView(R2.id.city_ticket_grid)
+    CountryGridView ticketGrid;
+    @BindView(R2.id.city_read_more)
+    CardView readMoreCard;
+    @BindView(R2.id.city_read_more_go)
+    MyListView readMore;
+    @BindView(R2.id.city_guide_shop)
+    CardView CityShopCard;
+    @BindView(R2.id.city_shop_title)
+    TextView cityShopTitle;
+
+    private static final int VIEWPAGER_H = 100;
+    private int currentPagerIndex = 0;
+    private int size;
+    private Handler handler=new Handler(this);
+    private String cityname;
+    private SharedPreferences sharedPreferences;
+    private List<String> list = new ArrayList<>();
+    private boolean isFrist=true;
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_city;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setMV(mModel,this);
+    }
+
+    @Override
+    public void initView() {
+        sharedPreferences=this.getSharedPreferences("image", Context.MODE_PRIVATE);
+        String city = getIntent().getStringExtra("city");
+        mPresenter.CityBean(city);
+        mViewPager.setAdapter(new CounrtryViewPagerAdapter(this, null));
+        ticketGrid.setAdapter(new CityTicketAdapter(this, null, null, R.layout.country_ticket_item));
+        readMore.setAdapter(new CityReadMoreAdapter(this,null,null,R.layout.city_read_more_item));
+        back.setOnClickListener(this);
+        mViewPager.addOnPageChangeListener(this);
+        readMore.setOnItemClickListener(this);
+        CityShopCard.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void retrunList(CitySiteBean citySiteBean) {
+        cityname = citySiteBean.getData().getCnname();
+        cityShopTitle.setText(cityname+"商城");
+        if(isFrist){
+            SharedPreferencesUtils.initShared(this,list, String.valueOf(citySiteBean.getData().getCity_id()),cityname,citySiteBean.getData().getCity_pic().get(0));
+            isFrist=false;
+        }
+        Log.e(TAG, "retrunList: "+citySiteBean.getData().getCity_pic() );
+        mPresenter.CityPager(getResources().getDisplayMetrics().widthPixels,
+                mViewPager.getLayoutParams().height,this,citySiteBean);
+        ((CityTicketAdapter) ticketGrid.getAdapter()).updateRes(citySiteBean.getData().getIcon_list());
+        if (citySiteBean.getData().getMguide_lists().size()>0){
+            readMoreCard.setVisibility(View.VISIBLE);
+            ((CityReadMoreAdapter) readMore.getAdapter()).updateRes(citySiteBean.getData().getMguide_lists());
+
+        }
+
+        toolbar.setTitle(cityname);
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setSubtitle(citySiteBean.getData().getEnname());
+        setSupportActionBar(toolbar);
+        int guide_num = citySiteBean.getData().getGuide_num();
+        if (guide_num > 0) {
+            cityGuideNum.setVisibility(View.VISIBLE);
+            city_book.setText(cityname + "锦囊");
+            city_book_num.setText("全部" + guide_num + "本");
+        } else {
+            cityGuideNum.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    @Override
+    public void returnViewPager(List<ImageView> list) {
+        Log.e(TAG, "returnViewPager: "+list );
+        size = list.size();
+        ((CounrtryViewPagerAdapter) mViewPager.getAdapter()).upDate(list);
+        handler.sendEmptyMessage(VIEWPAGER_H);
+    }
+
+    @Override
+    public void OnStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+    @Override
+    public boolean handleMessage(Message message) {
+        switch (message.what) {
+            case VIEWPAGER_H:
+                mViewPager.setCurrentItem(currentPagerIndex % size, false);
+                currentPagerIndex++;
+                handler.sendEmptyMessageDelayed(VIEWPAGER_H, 2500);
+                break;
+        }
+        return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.city_back:
+                finish();
+                break;
+            case R.id.city_guide_shop:
+                Intent intent = new Intent(this, ShopSearchSecondActicity.class);
+                intent.putExtra("keyword",cityname);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (adapterView.getId()) {
+            case R.id.city_read_more_go:
+                Intent intent = new Intent(this, CityReadMoreActivity.class);
+                String mguide_id = String.valueOf(((CityReadMoreAdapter) readMore.getAdapter()).getItem(i).getMguide_id());
+                intent.putExtra("id", mguide_id);
+                startActivity(intent);
+            break;
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (list!=null){
+            list.clear();
+        }
+        list.add(sharedPreferences.getString("image", "http://pic1.qyer.com/album/user/370/89/Qk5VShMOaA/index/339x2260"));
+        list.add(sharedPreferences.getString("site1", "香港"));
+        list.add(sharedPreferences.getString("site1id", "50"));
+        list.add(sharedPreferences.getString("site2", "澳门"));
+        list.add(sharedPreferences.getString("site2id", "51"));
+        list.add(sharedPreferences.getString("site3", "巴黎"));
+        list.add(sharedPreferences.getString("site3id", "20"));
+        list.add(sharedPreferences.getString("site4", "迪拜"));
+        list.add(sharedPreferences.getString("site4id", "6406"));
+    }
+}

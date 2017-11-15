@@ -1,0 +1,200 @@
+package jcp.com.exiyou.ui.citysite.activity;
+
+import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
+
+import butterknife.BindView;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseActivity;
+import jcp.com.exiyou.base.util.LoadAnimation;
+import jcp.com.exiyou.ui.citysite.adapters.CityReadMoreListAdapter;
+import jcp.com.exiyou.ui.citysite.bean.CityReadMoreBean;
+import jcp.com.exiyou.ui.citysite.contract.CityReadMoreContract;
+import jcp.com.exiyou.ui.citysite.model.CityReadMoreModel;
+import jcp.com.exiyou.ui.citysite.persenter.CityReadMorePresenter;
+import jcp.com.exiyou.ui.shoppingmall.view.MyListView;
+
+/**
+ * Created by 超鹏 on 2017/4/5.
+ * //                            _ooOoo_
+ * //                           o8888888o
+ * //                           88" . "88
+ * //                           (| -_- |)
+ * //                            O\ = /O
+ * //                        ____/`---'\____
+ * //                      .   ' \\| |// `.
+ * //                       / \\||| : |||// \
+ * //                     / _||||| -:- |||||- \
+ * //                       | | \\\ - /// | |
+ * //                     | \_| ''\---/'' | |
+ * //                      \ .-\__ `-` ___/-. /
+ * //                   ___`. .' /--.--\ `. . __
+ * //                ."" '< `.___\_<|>_/___.' >'"".
+ * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+ * //                 \ \ `-. \_ __\ /__ _/ .-` / /
+ * //         ======`-.____`-.___\_____/___.-`____.-'======
+ * //                            `=---='
+ * //         .............................................
+ * //
+ * //            佛祖镇楼                  BUG辟易
+ * 佛曰:
+ * 写字楼里写字间，写字间里程序员；程序人员写程序，又拿程序换酒钱。酒醒只在网上坐，酒醉还来网下眠；酒醉酒醒日复日，网上网下年复年。
+ * 宁愿老死程序间，只要老板多发钱；小车大房不去想，撰个二千好过年。若要见识新世面，公务员比程序员；一个在天一在地，而且还比我们闲。
+ * 别人看我穿白领，我看别人穿名牌；天生我才写程序，臀大近视肩周炎。年复一年春光度，度得他人做老板；老板扣我薄酒钱，没有酒钱怎过年。
+ * 春光逝去皱纹起，作起程序也委靡；来到水源把水灌，打死不做程序员。别人笑我忒疯癫，我笑他人命太贱；状元三百六十行，偏偏来做程序员。
+ * 但愿老死电脑间，不愿鞠躬老板前；奔驰宝马贵者趣，公交自行程序员。别人笑我忒疯癫，我笑自己命太贱；不见满街漂亮妹，哪个归得程序员。
+ * 不想只挣打工钱，那个老板愿发钱；小车大房咱要想，任我享用多悠闲。比尔能搞个微软，我咋不能捞点钱；一个在天一在地，定有一日乾坤翻。
+ * 我在天来他在地，纵横天下山水间；傲视武林豪杰墓，一樽还垒风月山。电脑面前眼发直，眼镜下面泪茫茫；做梦发财好几亿，从此不用手指忙。
+ * 哪知梦醒手空空，老板看到把我训；待到老时眼发花，走路不知哪是家。小农村里小民房，小民房里小民工；小民工人写程序，又拿代码讨赏钱。
+ * 钱空只在代码中，钱醉仍在代码间；有钱无钱日复日，码上码下年复年。但愿老死代码间，不愿鞠躬奥迪前，奥迪奔驰贵者趣，程序代码贫者缘。
+ * 若将贫贱比贫者，一在平地一在天；若将贫贱比车马，他得驱驰我得闲。别人笑我忒疯癫，我笑他人看不穿；不见盖茨两手间，财权富贵世人鉴。
+ */
+
+public class CityReadMoreActivity extends BaseActivity<CityReadMorePresenter, CityReadMoreModel> implements CityReadMoreContract.CityReadMoreView, AdapterView.OnItemClickListener, AbsListView.OnScrollListener, View.OnClickListener {
+
+    private static final String TAG = CityReadMoreActivity.class.getSimpleName();
+    @BindView(R2.id.city_read_more_listview)
+    MyListView myListView;
+    @BindView(R2.id.city_read_more_toolbar)
+    Toolbar toolbar;
+    @BindView(R2.id.city_read_more_appbar_image)
+    ImageView appbarImage;
+    @BindView(R2.id.city_read_more_author_image)
+    FloatingActionButton authorImage;
+    @BindView(R2.id.city_read_more_author_name)
+    TextView authorName;
+    @BindView(R2.id.city_read_more_content)
+    TextView contentTitle;
+    @BindView(R2.id.city_read_more_item_title)
+    TextView mTitle;
+    @BindView(R2.id.city_read_more_back)
+    ImageView back;
+    private boolean isFrist = true;
+    private boolean isBottom = true;
+    private String readMoreId;
+    private int page = 1;
+    private View footer;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_read_more_city;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setMV(mModel, this);
+    }
+
+    @Override
+    public void initView() {
+
+//        View view = LayoutInflater.from(this).inflate(R.layout.city_read_more_list_head, null);
+//        appbarImage=(ImageView)(view.findViewById(R2.id.city_read_more_appbar_image));
+//        authorImage=(FloatingActionButton)(view.findViewById(R2.id.city_read_more_author_image));
+//        authorName=(TextView)(view.findViewById(R2.id.city_read_more_author_name));
+//        contentTitle=(TextView)(view.findViewById(R2.id.city_read_more_content));
+//        mTitle=(TextView)(view.findViewById(R2.id.city_read_more_item_title));
+//
+//        myListView.addHeaderView(view);
+
+        readMoreId = getIntent().getStringExtra("id");
+        mPresenter.CityReadMorePageBean(State.START, readMoreId, page);
+        myListView.setAdapter(new CityReadMoreListAdapter(this, null, null, R.layout.city_read_more_list_item));
+        myListView.setOnItemClickListener(this);
+        myListView.setOnScrollListener(this);
+        footer = LayoutInflater.from(this).inflate(R.layout.recommend_footer, null);
+        back.setOnClickListener(this);
+    }
+
+    @Override
+    public void retrunList(State state, CityReadMoreBean homePageBean) {
+        if (isFrist) {
+            mTitle.setText(homePageBean.getData().getTitle());
+            toolbar.setTitle(homePageBean.getData().getTitle());
+            toolbar.setTitleTextColor(Color.WHITE);
+            setSupportActionBar(toolbar);
+            ImageLoader.getInstance().displayImage(homePageBean.getData().getAvatar(), authorImage);
+            Picasso.with(this).load(homePageBean.getData().getPhoto()).into(appbarImage);
+            authorName.setText(homePageBean.getData().getUsername());
+            contentTitle.setText(homePageBean.getData().getDescription());
+            isFrist = false;
+        }
+        switch (state) {
+            case START:
+                ((CityReadMoreListAdapter) myListView.getAdapter()).updateRes(homePageBean.getData().getPois());
+                break;
+            case END:
+                ((CityReadMoreListAdapter) myListView.getAdapter()).addRes(homePageBean.getData().getPois());
+                break;
+        }
+
+    }
+
+    @Override
+    public void OnStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+        switch (scrollState) {
+            case SCROLL_STATE_IDLE:
+                if (isBottom) {
+                    mPresenter.CityReadMorePageBean(State.END, readMoreId, ++page);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        isBottom = firstVisibleItem + visibleItemCount == totalItemCount;
+        Log.e(TAG, "onScroll: " +firstVisibleItem+"--"+visibleItemCount+"--"+totalItemCount+isBottom);
+        if (isBottom) {
+            mPresenter.CityReadMorePageBean(State.END, readMoreId, ++page);
+        }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.city_read_more_back:
+                finish();
+                break;
+
+        }
+    }
+
+    public enum State {
+        START, END;
+    }
+}

@@ -1,0 +1,10 @@
+package jcp.com.exiyou.ui.destination.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import jcp.com.exiyou.base.base.BaseActivity;
+
+public class DestinationActivity  {
+
+}

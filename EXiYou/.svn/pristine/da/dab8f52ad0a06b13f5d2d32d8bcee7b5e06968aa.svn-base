@@ -1,0 +1,25 @@
+package jcp.com.exiyou.ui.community.adapters;
+
+import android.content.Context;
+
+import java.util.List;
+
+import jcp.com.exiyou.base.adapters.BaseListViewAdapter;
+import jcp.com.exiyou.ui.community.bean.RecommendDataBean;
+
+/**
+ * Created by SweetDream on 2017/3/27.
+ */
+
+public class RecommendListAdapter extends BaseListViewAdapter<RecommendDataBean> {
+
+
+    public RecommendListAdapter(Context context, String mType, List<RecommendDataBean> mData, int... layoutIds) {
+        super(context, mType, mData, layoutIds);
+    }
+
+    @Override
+    protected void loadData(ViewHolder holder, RecommendDataBean item, int position) {
+
+    }
+}

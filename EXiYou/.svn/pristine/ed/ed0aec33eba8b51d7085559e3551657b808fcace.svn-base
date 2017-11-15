@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/shoppage_gridview_image"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/shoppage_gridview_image"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+        <TextView
+            android:id="@+id/shoppage_gridview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_marginTop="5dp"
+            android:textSize="14sp"
+            android:textColor="#222"
+            android:text="上海直飞北海4天3晚自由行(含早餐+多酒店可选+15kg行李额)"/>
+        <TextView
+            android:id="@+id/shoppage_gridview_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="8dp"
+            android:text="已售13件"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/shoppage_gridview_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="8dp"
+            android:text="元起"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/shoppage_gridview_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/shoppage_gridview_text"
+            android:layout_toLeftOf="@id/shoppage_gridview_text"
+            android:text="1199"
+            android:textColor="#f45858"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

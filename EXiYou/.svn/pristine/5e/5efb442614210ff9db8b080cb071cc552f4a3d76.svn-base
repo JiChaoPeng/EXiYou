@@ -1,0 +1,75 @@
+package jcp.com.exiyou.api;
+
+
+import jcp.com.exiyou.constants.HttpParams;
+import jcp.com.exiyou.ui.citysite.bean.CitySiteBean;
+import jcp.com.exiyou.ui.community.bean.enterinto.EnterIntoBean;
+import jcp.com.exiyou.ui.community.bean.enterintodetails.DetailsBean;
+import jcp.com.exiyou.ui.community.bean.enterintotitle.TitleBean;
+import jcp.com.exiyou.ui.community.bean.recommend.RecommendBean;
+import jcp.com.exiyou.ui.countrysite.bean.CountryMoreCityBean;
+import jcp.com.exiyou.ui.countrysite.bean.CountrySiteBean;
+import jcp.com.exiyou.ui.destination.bean.DestinationListBean;
+import jcp.com.exiyou.ui.homepage.bean.HomePageBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListHotGoods;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchListBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchSecondListBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSpecialListBean;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+import rx.Observable;
+
+public interface ApiService {
+
+
+    @GET(HttpParams.COMMUNITY_RECOMMEND)
+    Observable<RecommendBean> getRecommendRes(@Query("page") int page);
+
+    @GET(HttpParams.HOMEPAGE_URL)
+    Observable<HomePageBean> getHomePageRes(@Query("page") int page);
+
+    @GET(HttpParams.DESTINATION_URL)
+    Observable<DestinationListBean> getDestinationRes();
+
+
+    //----------shop------------------//
+    @GET(HttpParams.COMMUNITY_SHOP)
+    Observable<ShopListHotGoods> getShopRes(@Query("page") int page);
+
+    @GET(HttpParams.SHOP_DISCOUNT)
+    Observable<ShopListBean> getShopHeaderRes();
+
+    @GET(HttpParams.SHOP_SPECIAL)
+    Observable<ShopSpecialListBean> getShopSpecialRes(@Query("type") String type);
+
+    @GET(HttpParams.SHOP_SEARCH)
+    Observable<ShopSearchListBean> getShopSearchRes(@Query("type1") String type, @Query("page") String page);
+
+    @GET(HttpParams.SHOP_SEARCH_SECOND)
+    Observable<ShopSearchSecondListBean> getShopSearchSecondPageRes(@Query("keyword") String keyword);
+
+    //---------shop-------------------//
+
+    // Community
+    @GET(HttpParams.COMMUNITY_ENTER_INTO)
+    Observable<EnterIntoBean> getEnterIntoRes();
+
+    @GET(HttpParams.COUNTRY_URL)
+    Observable<CountrySiteBean> getCountryRes(@Query("country_id") int page);
+
+
+    @GET(HttpParams.ENTER_INTO_TITLE)
+    Observable<TitleBean> getEnterIntoTitleRes(@Query("fid") int fid);
+
+    @GET(HttpParams.ENTER_INTO_DETAILS)
+    Observable<DetailsBean> getEnterIntoDetailsRes(@Query("forum_id") int id, @Query("forum_type") String type, @Query("page") int page);
+
+    //country
+    @GET(HttpParams.COUNTRYMORECITY_URL)
+    Observable<CountryMoreCityBean> getMoreCityRes(@Query("page") int page, @Query("countryid") int country_id);
+
+    @GET(HttpParams.CITY_SITE_URL)
+    Observable<CitySiteBean> getCityRes(@Query("city_id") String city_id);
+
+}

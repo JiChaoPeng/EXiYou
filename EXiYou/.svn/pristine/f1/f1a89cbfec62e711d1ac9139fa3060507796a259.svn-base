@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70.2dp"
+    android:paddingLeft="20dp"
+    android:paddingTop="15dp">
+
+    <ImageView
+        android:id="@+id/enter_into_right_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/ic_qyer_gray_60" />
+
+    <TextView
+        android:id="@+id/enter_into_right_total_threads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="3dp"
+        android:text="total_threads"
+        android:textSize="13sp" />
+
+    <ImageView
+        android:id="@+id/enter_into_right_count_image"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@id/enter_into_right_total_threads"
+        android:src="@mipmap/ic_forum_article_count" />
+
+    <TextView
+        android:id="@+id/enter_into_right_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@id/enter_into_right_count_image"
+        android:layout_toRightOf="@id/enter_into_right_image"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="name"
+        android:textColor="@color/color_black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/enter_into_right_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/enter_into_right_image"
+        android:layout_alignLeft="@id/enter_into_right_name"
+        android:layout_alignRight="@id/enter_into_right_total_threads"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="description"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_black_alpha_3" />
+
+</RelativeLayout>

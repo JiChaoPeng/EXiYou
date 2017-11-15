@@ -1,0 +1,25 @@
+package jcp.com.exiyou.api;
+
+
+import jcp.com.exiyou.constants.HttpParams;
+import jcp.com.exiyou.ui.community.bean.RecommendBean;
+import jcp.com.exiyou.ui.community.bean.RecommendDataBean;
+import jcp.com.exiyou.ui.destination.bean.DestinationListBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListBean;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+import rx.Observable;
+
+public interface ApiService {
+
+
+    @GET(HttpParams.COMMUNITY_RECOMMEND)
+    Observable<RecommendBean> getRecommendRes(@Query("page")int page);
+
+    @GET(HttpParams.DESTINATION_URL)
+    Observable<DestinationListBean> getDestinationRes();
+
+    @GET(HttpParams.COMMUNITY_SHOP)
+    Observable<ShopListBean> getShopRes();
+
+}

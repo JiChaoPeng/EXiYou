@@ -1,0 +1,99 @@
+package jcp.com.exiyou.ui.shoppingmall.activity;
+
+import android.content.Intent;
+import android.util.Log;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseActivity;
+import jcp.com.exiyou.ui.shoppingmall.adapter.ShopSearchListAdapter;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchListBean;
+import jcp.com.exiyou.ui.shoppingmall.contract.ShopContract;
+import jcp.com.exiyou.ui.shoppingmall.model.ShopSearchModel;
+import jcp.com.exiyou.ui.shoppingmall.presenter.ShopSearchPresenter;
+
+public class ShopSearchListActivity extends BaseActivity<ShopSearchPresenter,ShopSearchModel> implements ShopContract.ShopSearchView {
+
+    private static final String TAG = ShopSearchListActivity.class.getSimpleName();
+    private ShopSearchListAdapter adapter;
+
+    @OnClick(R2.id.shoppage_select_title1)
+    public void selectTitle1(){
+
+    }
+
+    @OnClick(R2.id.shoppage_select_title2)
+    public void selectTitle2(){
+
+    }
+
+    @OnClick(R2.id.shoppage_select_title3)
+    public void selectTitle3(){
+
+    }
+
+    @BindView(R2.id.shoppage_style_listview)
+    ListView mListView;
+
+    @OnClick(R2.id.shoppage_style_back)
+    public void styleBack(){
+        this.finish();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_shop_style_one;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setMV(mModel,this);
+    }
+
+    private int page = 1;
+
+    @Override
+    public void initView() {
+        //请求数据,获取返回的listview中的数据,加载数据
+
+        Intent intent = getIntent();
+        String stg_id = intent.getStringExtra("stg_id");
+        Log.e(TAG, "initView: " + stg_id );
+
+        mPresenter.getShopSearchRes(stg_id,String.valueOf(page));
+
+        adapter = new ShopSearchListAdapter(this,null,listData, R.layout.shoppage_search_list_item);
+        mListView.setAdapter(adapter);
+    }
+
+    List<ShopSearchBean.ShopSearchList> listData = new ArrayList<>();
+    @Override
+    public void returnShopSearchListData(ShopSearchListBean data) {
+        Log.e(TAG, "returnShopSearchListData: " + data.getData().toString());
+        listData = data.getData().getList();
+        adapter.updateRes(listData);
+
+    }
+
+    @Override
+    public void OnStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
+    }
+}

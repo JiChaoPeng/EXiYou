@@ -1,0 +1,37 @@
+package jcp.com.exiyou.ui.community.bean;
+
+import java.util.List;
+
+/**
+ * Created by SweetDream on 2017/3/25.
+ */
+public class RecommendDataBean {
+
+    private List<RecommendIndex> index_list;
+    private List<RecommendIcon> icon_list;
+    private List<RecommendTag> tag_list;
+
+    public List<RecommendIndex> getIndex_list() {
+        return index_list;
+    }
+
+    public void setIndex_list(List<RecommendIndex> index_list) {
+        this.index_list = index_list;
+    }
+
+    public List<RecommendIcon> getIcon_list() {
+        return icon_list;
+    }
+
+    public void setIcon_list(List<RecommendIcon> icon_list) {
+        this.icon_list = icon_list;
+    }
+
+    public List<RecommendTag> getTag_list() {
+        return tag_list;
+    }
+
+    public void setTag_list(List<RecommendTag> tag_list) {
+        this.tag_list = tag_list;
+    }
+}

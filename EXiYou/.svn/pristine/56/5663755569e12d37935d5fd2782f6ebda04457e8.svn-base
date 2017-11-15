@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_shop_search_second_acticity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="jcp.com.exiyou.ui.shoppingmall.activity.ShopSearchSecondActicity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="320dp">
+
+        <!-- layout_scrollFlags
+                scroll 滚动
+                exitUntilCollapsed 直到滑动到顶部才开始展开折叠区域
+                toolbar可以悬停到顶部屏幕
+                enterAlwaysCollapsed 和上衣效果相似,知识toolbar会划出屏幕
+         -->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@mipmap/main_tablayout_back_img"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/shoppage_wv_details_back"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/ic_arrow_back_white_24dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:layout_margin="10dp"
+                    >
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_deal_search"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="10"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="当前目的地"
+                        android:focusableInTouchMode="true"
+                        android:textSize="14sp"
+                        android:textColorHint="#bcb4b4"/>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_close_nor"
+                        android:layout_marginRight="10dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/shoppage_search_second_header_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginTop="60dp">
+            </android.support.v4.view.ViewPager>
+        </FrameLayout>
+
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/shoppage_search_second_header_tablayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:background="#fff"-->
+            <!--app:tabIndicatorColor="#fff"-->
+            <!--&gt;</android.support.design.widget.TabLayout>-->
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/shoppage_search_second_messageviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    </android.support.v4.view.ViewPager>
+
+</android.support.design.widget.CoordinatorLayout>

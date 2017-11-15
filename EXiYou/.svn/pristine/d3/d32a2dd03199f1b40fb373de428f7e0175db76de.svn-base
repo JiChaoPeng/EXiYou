@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        app:layout_heightPercent="26%"
+        app:layout_widthPercent="100%">
+
+        <ImageView
+            android:id="@+id/homepage_list_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/homepage_list_type"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/color_green_tab_alph"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </FrameLayout>
+
+    <ImageView
+        app:layout_marginTopPercent="21%"
+        android:id="@+id/homepage_list_author_image"
+        android:layout_gravity="center_horizontal"
+        app:layout_heightPercent="12%"
+        app:layout_widthPercent="12%" />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:layout_marginTopPercent="29%"
+        android:id="@+id/homepage_list_author"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_heightPercent="35%"
+        app:layout_marginTopPercent="26%"
+        app:layout_widthPercent="100%">
+
+        <TextView
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/homepage_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_margin="10dp"
+            android:id="@+id/homepage_list_subject"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorGary_6"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+
+            android:id="@+id/homepage_list_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+</android.support.percent.PercentFrameLayout>

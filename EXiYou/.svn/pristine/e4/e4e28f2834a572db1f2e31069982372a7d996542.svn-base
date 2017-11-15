@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">EXiYou</string>
+
+    <string name="home_page">首页</string>
+    <string name="destination">目的地</string>
+    <string name="shopping_mall">商城</string>
+    <string name="community">社区</string>
+    <string name="recommend">推荐</string>
+    <string name="enter_into">进入版面</string>
+
+</resources>

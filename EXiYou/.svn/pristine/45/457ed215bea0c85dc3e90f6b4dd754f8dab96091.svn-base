@@ -1,0 +1,473 @@
+package jcp.com.exiyou.ui.shoppingmall.adapter;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.ui.shoppingmall.activity.ShopSearchListActivity;
+import jcp.com.exiyou.ui.shoppingmall.activity.ShopSpecialActivity;
+import jcp.com.exiyou.ui.shoppingmall.activity.ShopWebViewIdDetails;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopHotGoods;
+
+/**
+ * Created by 周强 on 2017/3/28.
+ */
+
+public class ShopRecycleAdapter extends RecyclerView.Adapter<ShopRecycleAdapter.ViewHolder> implements View.OnClickListener {
+
+    private static final String TAG = ShopRecycleAdapter.class.getSimpleName();
+    private Context context;
+    private RecyclerView mRecyclerView;
+    private List<ShopHotGoods> data;
+    private LayoutInflater inflater;
+    private ShopBean data1;
+    private List<View> type4View = new ArrayList<>();
+    private List<View> type3View = new ArrayList<>();
+    private List<View> type1View = new ArrayList<>();
+
+    public ShopRecycleAdapter(Context context, List<ShopHotGoods> data, ShopBean data1) {
+        this.context = context;
+        inflater = LayoutInflater.from(context);
+        if (data != null) {
+            this.data = data;
+        } else {
+            this.data = new ArrayList<>();
+        }
+        this.data1 = data1;
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemCount() {
+        if (data1 == null) {
+            return -1;
+        }
+        return data != null ? data.size() : 0;
+    }
+
+    public void addRes(List<ShopHotGoods> data, ShopBean data1) {
+        if (data != null && data1 != null) {
+            this.data.addAll(data);
+            this.data1 = data1;
+            notifyDataSetChanged();
+        }
+    }
+
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = null;
+        switch (viewType) {
+            case 0:
+                itemView = inflater.inflate(R.layout.shoppage_recyclerview_header, parent, false);
+                break;
+            case 1:
+                itemView = inflater.inflate(R.layout.shoppage_recycleview_item1, parent, false);
+                break;
+            case 2:
+            case 3:
+            case 4:
+                itemView = inflater.inflate(R.layout.shoppage_recycleview_item2, parent, false);
+                break;
+            case 5:
+            case 6:
+                itemView = inflater.inflate(R.layout.shoppage_recycleview_item3, parent, false);
+                break;
+            default:
+                itemView = inflater.inflate(R.layout.shoppage_recycleview_item4, parent, false);
+                break;
+        }
+        return new ViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
+        if (position == 0) {
+            bindType1View(holder);
+
+        } else if (position == 1) {
+            bindType2View(holder);
+
+        } else if (position > 1 && position < 5) {
+            bindType3View(holder, position);
+
+        } else if (position == 5 || position == 6) {
+            bindType4View(holder, position);
+
+        } else {
+            bindType5View(holder, position);
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        Intent intent = new Intent(context, ShopWebViewIdDetails.class);
+        Intent intent3 = new Intent(context, ShopSpecialActivity.class);
+        Intent intent4 = new Intent(context, ShopSearchListActivity.class);
+
+        switch (v.getId()) {
+            case R.id.shoppage_header_1:
+            case R.id.shoppage_header_2:
+            case R.id.shoppage_header_3:
+            case R.id.shoppage_header_4:
+            case R.id.shoppage_header_5:
+            case R.id.shoppage_header_6:
+            case R.id.shoppage_header_7:
+            case R.id.shoppage_header_8:
+            case R.id.shoppage_header_9:
+            case R.id.shoppage_header_10:
+                int size = type1View.size();
+                for (int i = 0; i < size; i++) {
+                    if(type1View.get(i) == v){
+                        Log.e(TAG, "onClick: i=" + i );
+                        Log.e(TAG, "onClick: stg_id=" + data1.getIcon_list().get(i).getStg_id() );
+                        intent4.putExtra("stg_id",data1.getIcon_list().get(i).getStg_id());
+                        break;
+                    }
+                }
+                context.startActivity(intent4);
+                break;
+            case R.id.showpage_recycleview_sub_icon_list1:
+                Toast.makeText(context, "跳转5", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.showpage_recycleview_sub_icon_list2:
+                Toast.makeText(context, "跳转5", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.showpage_recycleview_sub_icon_list3:
+                Toast.makeText(context, "跳转5", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.showpage_recycleview_sub_icon_list4:
+                Toast.makeText(context, "跳转5", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.shoppage_gridview_discount_topic_photo:
+            case R.id.shoppage_gridview_discount_topic_layout3:
+                if(type4View.get(3) == v) {
+                    intent.putExtra("url", data1.getDiscount_topic().get(0).getTopic().getLink_url());
+                }else{
+                    intent.putExtra("url", data1.getDiscount_topic().get(1).getTopic().getLink_url());
+                }
+                intent.putExtra("type", "2");
+                context.startActivity(intent);
+                break;
+
+            case R.id.shoppage_gridview_discount_topic_linearlayout1:
+                if(type4View.get(1) == v) {
+                    intent.putExtra("id", data1.getDiscount_topic().get(0).getList().get(0).getId());
+                }else{
+                    intent.putExtra("id", data1.getDiscount_topic().get(1).getList().get(0).getId());
+                }
+                intent.putExtra("type", "1");
+                context.startActivity(intent);
+                break;
+            case R.id.shoppage_gridview_discount_topic_linearlayout2:
+                if(type4View.get(2) == v) {
+                    intent.putExtra("id", data1.getDiscount_topic().get(0).getList().get(1).getId());
+                }else{
+                    intent.putExtra("id", data1.getDiscount_topic().get(1).getList().get(1).getId());
+                }
+                intent.putExtra("type", "1");
+                context.startActivity(intent);
+                break;
+
+            case R.id.shoppage_gridview_hotarea_photo1: //跳转至风格3界面
+                //TODO
+                Toast.makeText(context, "跳转3", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.shoppage_gridview_hotarea_photo2:
+                //TODO
+                Toast.makeText(context, "跳转3", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.shoppage_gridview_hotarea_photo3:
+                //TODO
+                Toast.makeText(context, "跳转3", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.shoppage_gridview_hotarea_photo4:
+                //TODO
+                Toast.makeText(context, "跳转3", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.shoppage_gridview_hotarea_linearlayout1:
+                if(type3View.get(4) == v) {
+                    intent.putExtra("id", data1.getHot_area().get(0).getList().get(0).getId());
+                }else if(type3View.get(11) == v){
+                    intent.putExtra("id", data1.getHot_area().get(1).getList().get(0).getId());
+                }else{
+                    intent.putExtra("id", data1.getHot_area().get(2).getList().get(0).getId());
+                }
+                intent.putExtra("type", "1");
+                context.startActivity(intent);
+                break;
+            case R.id.shoppage_gridview_hotarea_linearlayout2:
+                if(type3View.get(5) == v) {
+                    intent.putExtra("id", data1.getHot_area().get(0).getList().get(1).getId());
+                }else if(type3View.get(12) == v){
+                    intent.putExtra("id", data1.getHot_area().get(1).getList().get(1).getId());
+                }else{
+                    intent.putExtra("id", data1.getHot_area().get(2).getList().get(1).getId());
+                }
+                intent.putExtra("type", "1");
+                context.startActivity(intent);
+                break;
+            case R.id.shoppage_gridview_hotarea_layout3:    //跳转至风格2界面
+                if(type3View.get(6) == v) {
+                    intent3.putExtra("areaType", data1.getHot_area().get(0).getType());
+                }else if(type3View.get(13) == v){
+                    intent3.putExtra("areaType", data1.getHot_area().get(1).getType());
+                }else{
+                    intent3.putExtra("areaType", data1.getHot_area().get(2).getType());
+                }
+                context.startActivity(intent3);
+                break;
+
+            case R.id.shoppage_gridview_market_topic_pic1:
+                intent.putExtra("url", data1.getMarket_topic().get(0).getUrl());
+                intent.putExtra("type", "2");
+                context.startActivity(intent);
+                break;
+            case R.id.shoppage_gridview_market_topic_pic2:
+                intent.putExtra("url", data1.getMarket_topic().get(1).getUrl());
+                intent.putExtra("type", "2");
+                context.startActivity(intent);
+                break;
+            case R.id.shoppage_gridview_market_topic_pic3:
+                intent.putExtra("url", data1.getMarket_topic().get(2).getUrl());
+                intent.putExtra("type", "2");
+                context.startActivity(intent);
+                break;
+
+            default:
+                int position = mRecyclerView.getChildAdapterPosition(v);
+                intent.putExtra("id", data.get(position - 7).getId());
+                intent.putExtra("type", "1");
+                context.startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        mRecyclerView = null;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private View itemView;
+        private Map<Integer, View> cacheViews;   //使用一个Map对已经实例化的View做一个缓存
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            this.itemView = itemView;
+            this.cacheViews = new HashMap<>();
+        }
+
+        public View findView(int resId) {
+            View v = null;
+            if (cacheViews.containsKey(resId)) {
+                v = cacheViews.get(resId);
+            } else {
+                v = itemView.findViewById(resId);
+                cacheViews.put(resId, v);
+            }
+            return itemView.findViewById(resId);
+        }
+
+        public void setText(int resId, String text) {
+            TextView textView = (TextView) findView(resId);
+            textView.setText(text);
+        }
+
+        public ImageView getImageView(int resId) {
+            ImageView imageView = (ImageView) findView(resId);
+            return imageView;
+        }
+
+        public LinearLayout getLinearLayout(int resId) {
+            LinearLayout linearLayout = (LinearLayout) findView(resId);
+            return linearLayout;
+        }
+
+        public RelativeLayout getRelativeLayout(int resId) {
+            RelativeLayout relativeLayout = (RelativeLayout) findView(resId);
+            return relativeLayout;
+        }
+    }
+
+
+    private void bindType1View(ViewHolder holder) {
+        List<ShopBean.ShopSubIconList> sub_icon_list = data1.getSub_icon_list();
+
+        Picasso.with(context).load(sub_icon_list.get(0).getCover()).into(holder.getImageView(R.id.shoppage_sub_icon_list1_image));
+        Picasso.with(context).load(sub_icon_list.get(1).getCover()).into(holder.getImageView(R.id.shoppage_sub_icon_list2_image));
+        Picasso.with(context).load(sub_icon_list.get(2).getCover()).into(holder.getImageView(R.id.shoppage_sub_icon_list3_image));
+        Picasso.with(context).load(sub_icon_list.get(3).getCover()).into(holder.getImageView(R.id.shoppage_sub_icon_list4_image));
+
+        holder.setText(R.id.shoppage_sub_icon_list1_title, sub_icon_list.get(0).getTitle());
+        holder.setText(R.id.shoppage_sub_icon_list2_title, sub_icon_list.get(1).getTitle());
+        holder.setText(R.id.shoppage_sub_icon_list3_title, sub_icon_list.get(2).getTitle());
+        holder.setText(R.id.shoppage_sub_icon_list4_title, sub_icon_list.get(3).getTitle());
+
+        holder.setText(R.id.shoppage_sub_icon_list1_sub_title, sub_icon_list.get(0).getSub_title());
+        holder.setText(R.id.shoppage_sub_icon_list2_sub_title, sub_icon_list.get(1).getSub_title());
+        holder.setText(R.id.shoppage_sub_icon_list3_sub_title, sub_icon_list.get(2).getSub_title());
+        holder.setText(R.id.shoppage_sub_icon_list4_sub_title, sub_icon_list.get(3).getSub_title());
+
+        //添加点击监听时间
+        LinearLayout linearLayout = (LinearLayout) holder.findView(R.id.shoppage_header1_5);
+        int childCount = linearLayout.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            type1View.add(linearLayout.getChildAt(i));
+            linearLayout.getChildAt(i).setOnClickListener(this);
+        }
+        LinearLayout linearLayout2 = (LinearLayout) holder.findView(R.id.shoppage_header6_10);
+        int childCount2 = linearLayout.getChildCount();
+        for (int i = 0; i < childCount2; i++) {
+            type1View.add(linearLayout2.getChildAt(i));
+            linearLayout2.getChildAt(i).setOnClickListener(this);
+        }
+
+        holder.getRelativeLayout(R.id.showpage_recycleview_sub_icon_list1).setOnClickListener(this);
+        holder.getRelativeLayout(R.id.showpage_recycleview_sub_icon_list2).setOnClickListener(this);
+        holder.getRelativeLayout(R.id.showpage_recycleview_sub_icon_list3).setOnClickListener(this);
+        holder.getRelativeLayout(R.id.showpage_recycleview_sub_icon_list4).setOnClickListener(this);
+
+    }
+
+    private void bindType2View(ViewHolder holder) {
+        List<ShopBean.ShopMarketTopic> market_topic = data1.getMarket_topic();
+        ImageView market_topic_pic1 = holder.getImageView(R.id.shoppage_gridview_market_topic_pic1);
+        Picasso.with(context).load(market_topic.get(0).getPic()).into(market_topic_pic1);
+        ImageView market_topic_pic2 = holder.getImageView(R.id.shoppage_gridview_market_topic_pic2);
+        Picasso.with(context).load(market_topic.get(1).getPic()).into(market_topic_pic2);
+        ImageView market_topic_pic3 = holder.getImageView(R.id.shoppage_gridview_market_topic_pic3);
+        Picasso.with(context).load(market_topic.get(2).getPic()).into(market_topic_pic3);
+
+        market_topic_pic1.setOnClickListener(this);
+        market_topic_pic2.setOnClickListener(this);
+        market_topic_pic3.setOnClickListener(this);
+    }
+
+    private void bindType3View(ViewHolder holder, int position) {
+        ShopBean.ShopHotArea shopHotArea = data1.getHot_area().get(position - 2);
+
+        if (shopHotArea.getType().equals("om")) {
+            holder.setText(R.id.shoppage_gridview_hotarea_type, "欧美");
+        } else if (shopHotArea.getType().equals("dny")) {
+            holder.setText(R.id.shoppage_gridview_hotarea_type, "东南亚");
+        } else if (shopHotArea.getType().equals("gat")) {
+            holder.setText(R.id.shoppage_gridview_hotarea_type, "港澳台");
+        } else if (shopHotArea.getType().equals("rh")) {
+            holder.setText(R.id.shoppage_gridview_hotarea_type, "日韩");
+        }
+
+        ImageView hotarea_photo1 = holder.getImageView(R.id.shoppage_gridview_hotarea_photo1);
+        Picasso.with(context).load(shopHotArea.getPlace().get(0).getPhoto()).into(hotarea_photo1);
+        ImageView hotarea_photo2 = holder.getImageView(R.id.shoppage_gridview_hotarea_photo2);
+        Picasso.with(context).load(shopHotArea.getPlace().get(1).getPhoto()).into(hotarea_photo2);
+        ImageView hotarea_photo3 = holder.getImageView(R.id.shoppage_gridview_hotarea_photo3);
+        Picasso.with(context).load(shopHotArea.getPlace().get(2).getPhoto()).into(hotarea_photo3);
+        ImageView hotarea_photo4 = holder.getImageView(R.id.shoppage_gridview_hotarea_photo4);
+        Picasso.with(context).load(shopHotArea.getPlace().get(3).getPhoto()).into(hotarea_photo4);
+        ImageView hotarea_list_photo1 = holder.getImageView(R.id.shoppage_gridview_hotarea_list_photo1);
+        Picasso.with(context).load(shopHotArea.getList().get(0).getPhoto()).into(hotarea_list_photo1);
+        ImageView hotarea_list_photo2 = holder.getImageView(R.id.shoppage_gridview_hotarea_list_photo2);
+        Picasso.with(context).load(shopHotArea.getList().get(1).getPhoto()).into(hotarea_list_photo2);
+
+        holder.setText(R.id.shoppage_gridview_hotarea_list_title1, shopHotArea.getList().get(0).getTitle());
+        holder.setText(R.id.shoppage_gridview_hotarea_list_title2, shopHotArea.getList().get(1).getTitle());
+        holder.setText(R.id.shoppage_gridview_hotarea_list_sold1, shopHotArea.getList().get(0).getSold());
+        holder.setText(R.id.shoppage_gridview_hotarea_list_sold2, shopHotArea.getList().get(1).getSold());
+        holder.setText(R.id.shoppage_gridview_hotarea_price2, shopHotArea.getList().get(0).getPrice());
+        holder.setText(R.id.shoppage_gridview_hotarea_price2, shopHotArea.getList().get(1).getPrice());
+
+        type3View.add(hotarea_photo1);
+        type3View.add(hotarea_photo2);
+        type3View.add(hotarea_photo3);
+        type3View.add(hotarea_photo4);
+        type3View.add(holder.getLinearLayout(R.id.shoppage_gridview_hotarea_linearlayout1));
+        type3View.add(holder.getLinearLayout(R.id.shoppage_gridview_hotarea_linearlayout2));
+        type3View.add(holder.getRelativeLayout(R.id.shoppage_gridview_hotarea_layout3));
+
+        //添加点击监听事件
+        hotarea_photo1.setOnClickListener(this);
+        hotarea_photo2.setOnClickListener(this);
+        hotarea_photo3.setOnClickListener(this);
+        hotarea_photo4.setOnClickListener(this);
+        holder.getLinearLayout(R.id.shoppage_gridview_hotarea_linearlayout1).setOnClickListener(this);
+        holder.getLinearLayout(R.id.shoppage_gridview_hotarea_linearlayout2).setOnClickListener(this);
+        holder.getRelativeLayout(R.id.shoppage_gridview_hotarea_layout3).setOnClickListener(this);
+    }
+
+
+    private void bindType4View(ViewHolder holder, int position) {
+        ShopBean.ShopDisCountTopic shopDisCountTopic = data1.getDiscount_topic().get(position - 5);
+        ImageView discount_topic_photo = holder.getImageView(R.id.shoppage_gridview_discount_topic_photo);
+
+        Picasso.with(context).load(shopDisCountTopic.getTopic().getPhoto()).into(discount_topic_photo);
+        Picasso.with(context).load(shopDisCountTopic.getList().get(0).getPhoto()).into(holder.getImageView(R.id.shoppage_gridview_discount_topic_list_photo1));
+        Picasso.with(context).load(shopDisCountTopic.getList().get(1).getPhoto()).into(holder.getImageView(R.id.shoppage_gridview_discount_topic_list_photo2));
+
+        holder.setText(R.id.shoppage_gridview_discount_topic_list_title1, shopDisCountTopic.getList().get(0).getTitle());
+        holder.setText(R.id.shoppage_gridview_discount_topic_price1, shopDisCountTopic.getList().get(0).getPrice());
+        holder.setText(R.id.shoppage_gridview_discount_topic_list_sold1, shopDisCountTopic.getList().get(0).getSold());
+        holder.setText(R.id.shoppage_gridview_discount_topic_list_title2, shopDisCountTopic.getList().get(1).getTitle());
+        holder.setText(R.id.shoppage_gridview_discount_topic_price2, shopDisCountTopic.getList().get(1).getPrice());
+        holder.setText(R.id.shoppage_gridview_discount_topic_list_sold2, shopDisCountTopic.getList().get(1).getSold());
+
+        type4View.add(discount_topic_photo);
+        LinearLayout discount_topic_linearlayout1 = holder.getLinearLayout(R.id.shoppage_gridview_discount_topic_linearlayout1);
+        type4View.add(discount_topic_linearlayout1);
+        LinearLayout discount_topic_linearlayout2 = holder.getLinearLayout(R.id.shoppage_gridview_discount_topic_linearlayout2);
+        type4View.add(discount_topic_linearlayout2);
+        RelativeLayout relativeLayout = holder.getRelativeLayout(R.id.shoppage_gridview_discount_topic_layout3);
+        type4View.add(relativeLayout);
+
+        //添加点击监听事件
+        discount_topic_photo.setOnClickListener(this);
+        discount_topic_linearlayout1.setOnClickListener(this);
+        discount_topic_linearlayout2.setOnClickListener(this);
+        relativeLayout.setOnClickListener(this);
+    }
+
+    private void bindType5View(ViewHolder holder, int position) {
+//        Log.e(TAG, "bindType5View: " + position + "--" + data.get(position - 7).getTitle());
+        holder.setText(R.id.shoppage_gridview_title, data.get(position - 7).getTitle());
+        holder.setText(R.id.shoppage_gridview_price, data.get(position - 7).getPrice());
+        holder.setText(R.id.shoppage_gridview_status, data.get(position - 7).getStatus());
+        Picasso.with(context).load(data.get(position - 7).getPhoto()).into(holder.getImageView(R.id.shoppage_gridview_image));
+
+        holder.itemView.setOnClickListener(this);
+    }
+}

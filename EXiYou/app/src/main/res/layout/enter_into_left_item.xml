@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/enter_into_left_layout"
+    android:layout_width="match_parent"
+    android:layout_height="50.2dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/enter_into_left_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/enter_into_bg_selector"
+        android:gravity="center"
+        android:text="推荐"
+        android:textColor="@color/enter_into_color_selector"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/color_black_alpha_1" />
+
+</LinearLayout>

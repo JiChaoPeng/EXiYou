@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:id="@+id/shoppage_gridview_hotarea_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="欧美"
+                android:textColor="#000"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp">
+                <ImageView
+                    android:id="@+id/shoppage_gridview_hotarea_photo1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_launcher" />
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    android:text="巴黎"
+                    android:layout_centerInParent="true" />
+                </RelativeLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp">
+                    <ImageView
+                        android:id="@+id/shoppage_gridview_hotarea_photo2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_launcher" />
+                    <TextView
+                        android:id="@+id/shoppage_gridview_hotarea_name2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        android:text="巴黎"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp">
+                    <ImageView
+                        android:id="@+id/shoppage_gridview_hotarea_photo3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_launcher" />
+                    <TextView
+                        android:id="@+id/shoppage_gridview_hotarea_name3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        android:text="巴黎"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp">
+                    <ImageView
+                        android:id="@+id/shoppage_gridview_hotarea_photo4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_launcher" />
+                    <TextView
+                        android:id="@+id/shoppage_gridview_hotarea_name4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        android:text="巴黎"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shoppage_gridview_hotarea_linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:id="@+id/shoppage_gridview_hotarea_list_photo1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_list_title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="【五一】全国联运欧洲多国7-13天含税机票+1晚酒店(国航直飞+北京往返+赠欧洲多城市ChicOutlet9折打折卡)"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_list_sold1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="已售13件"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_list_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginRight="8dp"
+                    android:text="元起"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_price1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="6dp"
+                    android:layout_toLeftOf="@id/shoppage_gridview_hotarea_list_text1"
+                    android:text="1199"
+                    android:textColor="#f45858"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="5dp"
+            android:background="@color/color_gray" />
+
+        <LinearLayout
+            android:id="@+id/shoppage_gridview_hotarea_linearlayout2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:id="@+id/shoppage_gridview_hotarea_list_photo2"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_list_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="【五一】全国联运欧洲多国7-13天含税机票+1晚酒店(国航直飞+北京往返+赠欧洲多城市ChicOutlet9折打折卡)"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_list_sold2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="已售13件"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_list_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginRight="8dp"
+                    android:text="元起"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/shoppage_gridview_hotarea_price2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="6dp"
+                    android:layout_toLeftOf="@id/shoppage_gridview_hotarea_list_text2"
+                    android:text="1199"
+                    android:textColor="#f45858"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="5dp"
+            android:background="@color/color_gray" />
+
+        <RelativeLayout
+            android:id="@+id/shoppage_gridview_hotarea_layout3"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/shoppage_gridview_hotarea_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="查看全部"
+                android:textColor="#f246ca7d"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

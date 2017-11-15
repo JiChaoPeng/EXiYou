@@ -1,0 +1,30 @@
+package jcp.com.exiyou.ui.shoppingmall.model;
+
+import jcp.com.exiyou.api.Api;
+import jcp.com.exiyou.base.event.AndroidIOToMain;
+import jcp.com.exiyou.constants.HttpParams;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListHotGoods;
+import jcp.com.exiyou.ui.shoppingmall.contract.ShopContract;
+import rx.Observable;
+
+
+public class ShopModel implements ShopContract.ShopModel{
+
+    public static final String TAG = ShopModel.class.getSimpleName();
+    @Override
+    public Observable<ShopListHotGoods> getShopRes1(int page) {
+
+        Api.setApiService(HttpParams.SHOP_HOSTNAME);
+        return Api.getApiService().getShopRes(page).compose(new AndroidIOToMain.IOToMainTransformer<ShopListHotGoods>());
+
+    }
+
+    @Override
+    public Observable<ShopListBean> getShopHeaderRes1() {
+        Api.setApiService(HttpParams.HOST_NAME);
+        return Api.getApiService().getShopHeaderRes().compose(new AndroidIOToMain.IOToMainTransformer<ShopListBean>());
+
+    }
+
+}

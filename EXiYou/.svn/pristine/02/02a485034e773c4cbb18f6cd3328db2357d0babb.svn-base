@@ -1,0 +1,46 @@
+package jcp.com.exiyou.base.util;
+
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import jcp.com.exiyou.R;
+
+/**
+ * Created by SweetDream on 2017/3/28.
+ */
+
+public class LoadAnimation {
+
+    private static boolean isLoading = true;
+
+    public static void startLoadingAnimation(View footer) {
+        ImageView circle = ((ImageView) footer.findViewById(R.id.recommend_foot_yuan_image));
+        ImageView needle = ((ImageView) footer.findViewById(R.id.recommend_foot_zhen_image));
+        TextView textView = (TextView) footer.findViewById(R.id.recommend_foot_text);
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 360, needle.getWidth() / 2, needle.getHeight() / 2);
+        rotateAnimation.setRepeatMode(Animation.RESTART);
+        rotateAnimation.setRepeatCount(-1);
+        rotateAnimation.setDuration(1000);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1, (float) 0.9, 1, (float) 0.9, circle.getWidth() / 2, circle.getHeight() / 2);
+        scaleAnimation.setRepeatMode(Animation.REVERSE);
+        scaleAnimation.setRepeatCount(-1);
+        scaleAnimation.setDuration(500);
+        if (isLoading) {
+            textView.setText("正在玩命加载中...");
+            needle.startAnimation(rotateAnimation);
+            circle.startAnimation(scaleAnimation);
+        } else {
+            textView.setText("网络加载失败...");
+            rotateAnimation.cancel();
+            scaleAnimation.cancel();
+        }
+    }
+
+    public static void stopLoadingAnimation() {
+        isLoading = false;
+    }
+}

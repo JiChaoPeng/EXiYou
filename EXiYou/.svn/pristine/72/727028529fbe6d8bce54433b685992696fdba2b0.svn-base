@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="jcp.com.exiyou">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".EXiYouApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/logo_128"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.splash.activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.splash.activity.GuideActivity" />
+        <activity android:name=".ui.splash.activity.MainActivity" />
+        <activity android:name=".ui.shoppingmall.activity.ShopHotGoodsDetails"></activity>
+        <activity android:name=".ui.destination.activity.DestinationActivity"></activity>
+    </application>
+
+</manifest>

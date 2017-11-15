@@ -1,0 +1,36 @@
+package jcp.com.exiyou.ui.shoppingmall.presenter;
+
+import android.util.Log;
+
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchListBean;
+import jcp.com.exiyou.ui.shoppingmall.contract.ShopContract;
+import rx.Subscriber;
+
+/**
+ * Created by 周强 on 2017/3/30.
+ */
+
+public class ShopSearchPresenter extends ShopContract.ShopSearchPresenter{
+
+    public static final String TAG = ShopSearchPresenter.class.getSimpleName();
+    @Override
+    public void getShopSearchRes(String stg_id, String page) {
+        mModel.getShopSearchRes(stg_id,page).subscribe(new Subscriber<ShopSearchListBean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError: getShopSearchRes" + e.getMessage() );
+            }
+
+            @Override
+            public void onNext(ShopSearchListBean shopSearchListBean) {
+
+                mView.returnShopSearchListData(shopSearchListBean);
+            }
+        });
+    }
+}

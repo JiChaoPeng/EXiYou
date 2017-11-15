@@ -1,0 +1,41 @@
+package jcp.com.exiyou.ui.shoppingmall.presenter;
+
+import android.util.Log;
+
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListHotGoods;
+import jcp.com.exiyou.ui.shoppingmall.contract.ShopContract;
+import rx.Subscriber;
+
+/**
+ * Created by 周强 on 2017/3/27.
+ */
+
+public class ShopPresenter extends ShopContract.ShopPresenter {
+
+    private static final String TAG = ShopPresenter.class.getSimpleName();
+
+    @Override
+    public void getShopRes(int page) {
+
+        mModel.getShopRes1(page).subscribe(new Subscriber<ShopListHotGoods>() {
+
+            @Override
+            public void onCompleted() {
+//                Log.e(TAG, "----onCompleted: " );
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "----onError: "+e.getMessage() );
+                mView.onError("---errorInfo:");
+            }
+
+            @Override
+            public void onNext(ShopListHotGoods shopListHotGoods) {
+                Log.e(TAG, "onNext: " + shopListHotGoods.getHot_goods().toString() );
+                mView.returnShopData(shopListHotGoods);
+            }
+
+        });
+    }
+}

@@ -1,0 +1,317 @@
+package jcp.com.exiyou.ui.homepage.fragment;
+
+
+import android.content.Intent;
+import android.graphics.drawable.StateListDrawable;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseFragment;
+import jcp.com.exiyou.base.util.LoadAnimation;
+import jcp.com.exiyou.ui.destination.activity.DestinationActivity;
+import jcp.com.exiyou.ui.homepage.HomePageEnentBus;
+import jcp.com.exiyou.ui.homepage.adapters.HomePageAdapter;
+import jcp.com.exiyou.ui.homepage.adapters.HomeViewPagerAdapter;
+import jcp.com.exiyou.ui.homepage.bean.HomePageBean;
+import jcp.com.exiyou.ui.homepage.contract.HomePageContract;
+import jcp.com.exiyou.ui.homepage.model.HomePageModel;
+import jcp.com.exiyou.ui.homepage.presenter.HomepagePresenter;
+
+/**
+ * Created by 超鹏 on 2017/3/27.
+ * //                            _ooOoo_
+ * //                           o8888888o
+ * //                           88" . "88
+ * //                           (| -_- |)
+ * //                            O\ = /O
+ * //                        ____/`---'\____
+ * //                      .   ' \\| |// `.
+ * //                       / \\||| : |||// \
+ * //                     / _||||| -:- |||||- \
+ * //                       | | \\\ - /// | |
+ * //                     | \_| ''\---/'' | |
+ * //                      \ .-\__ `-` ___/-. /
+ * //                   ___`. .' /--.--\ `. . __
+ * //                ."" '< `.___\_<|>_/___.' >'"".
+ * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+ * //                 \ \ `-. \_ __\ /__ _/ .-` / /
+ * //         ======`-.____`-.___\_____/___.-`____.-'======
+ * //                            `=---='
+ * //         .............................................
+ * //
+ * //            佛祖镇楼                  BUG辟易
+ * 佛曰:
+ * 写字楼里写字间，写字间里程序员；程序人员写程序，又拿程序换酒钱。酒醒只在网上坐，酒醉还来网下眠；酒醉酒醒日复日，网上网下年复年。
+ * 宁愿老死程序间，只要老板多发钱；小车大房不去想，撰个二千好过年。若要见识新世面，公务员比程序员；一个在天一在地，而且还比我们闲。
+ * 别人看我穿白领，我看别人穿名牌；天生我才写程序，臀大近视肩周炎。年复一年春光度，度得他人做老板；老板扣我薄酒钱，没有酒钱怎过年。
+ * 春光逝去皱纹起，作起程序也委靡；来到水源把水灌，打死不做程序员。别人笑我忒疯癫，我笑他人命太贱；状元三百六十行，偏偏来做程序员。
+ * 但愿老死电脑间，不愿鞠躬老板前；奔驰宝马贵者趣，公交自行程序员。别人笑我忒疯癫，我笑自己命太贱；不见满街漂亮妹，哪个归得程序员。
+ * 不想只挣打工钱，那个老板愿发钱；小车大房咱要想，任我享用多悠闲。比尔能搞个微软，我咋不能捞点钱；一个在天一在地，定有一日乾坤翻。
+ * 我在天来他在地，纵横天下山水间；傲视武林豪杰墓，一樽还垒风月山。电脑面前眼发直，眼镜下面泪茫茫；做梦发财好几亿，从此不用手指忙。
+ * 哪知梦醒手空空，老板看到把我训；待到老时眼发花，走路不知哪是家。小农村里小民房，小民房里小民工；小民工人写程序，又拿代码讨赏钱。
+ * 钱空只在代码中，钱醉仍在代码间；有钱无钱日复日，码上码下年复年。但愿老死代码间，不愿鞠躬奥迪前，奥迪奔驰贵者趣，程序代码贫者缘。
+ * 若将贫贱比贫者，一在平地一在天；若将贫贱比车马，他得驱驰我得闲。别人笑我忒疯癫，我笑他人看不穿；不见盖茨两手间，财权富贵世人鉴。
+ */
+
+public class HomePageFragment extends BaseFragment<HomepagePresenter, HomePageModel> implements
+        HomePageContract.HomePageView, SwipeRefreshLayout.OnRefreshListener, Handler.Callback, ViewPager.OnPageChangeListener, AbsListView.OnScrollListener, AdapterView.OnItemClickListener, View.OnClickListener {
+    private static final String TAG = HomePageFragment.class.getSimpleName();
+    private static final int VIEWPAGER_H = 100;
+    @BindView(R2.id.homepage_listview)
+    ListView mHomePageListView;
+    @BindView(R2.id.homepage_refresh)
+    SwipeRefreshLayout mHomePageRefresh;
+    private int page = 1;
+    private HomePageAdapter mHomePageAdapter;
+    private ViewPager mHomeViewPager;
+    private RadioGroup mRadioGroup;
+    private int mPagerSize = 1;
+    private boolean isCheck = false;
+    private int currentPagerIndex = 1;
+    private Handler mHandler = new Handler(this);
+    private View footer;
+    private boolean isBottom;
+    private TextView mMoreType;
+    private List<String> url=new ArrayList<>();
+
+    @Override
+    public void onClick(View view) {
+        Log.e(TAG, "onClick:" + mHomeViewPager.getCurrentItem());
+    }
+
+    public enum State {
+        START, END;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_homepage;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setMV(mModel, this);
+    }
+
+    @Override
+    public void initView() {
+        mPresenter.getHomePageBean(State.START, page);
+        mHomePageAdapter = new HomePageAdapter(getContext(), null, null, R.layout.homepage_list_item);
+        mHomePageListView.setAdapter(mHomePageAdapter);
+        mHomePageRefresh.setOnRefreshListener(this);
+
+        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.homepage_head, null);
+        footer = LayoutInflater.from(getActivity()).inflate(R.layout.recommend_footer, null);
+        mHomePageListView.addFooterView(footer);
+        footer.setVisibility(View.GONE);
+        mMoreType = (TextView) inflate.findViewById(R.id.homepage_more_site);
+
+        mHomeViewPager = (ViewPager) inflate.findViewById(R.id.homepage_viewpager);
+        mHomeViewPager.setAdapter(new HomeViewPagerAdapter(getContext(), null));
+        mRadioGroup = (RadioGroup) inflate.findViewById(R.id.homepage_radio_group);
+        mHomePageListView.addHeaderView(inflate);
+//        inflate.setOnClickListener(this);
+
+        mHomeViewPager.addOnPageChangeListener(this);
+        mHomePageListView.setOnScrollListener(this);
+        mHomePageListView.setOnItemClickListener(this);
+//        mHomeViewPager.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    public void retrunList(State state, HomePageBean homePageBean) {
+//        Log.e(TAG, "retrunList: " + homePageBean.getDataBean().getFeed().getEntry().size());
+        switch (state) {
+            case START:
+                int size = homePageBean.getDataBean().getSlide().size();
+                if (size != 0) {
+                    mPagerSize = size;
+                }
+                mHomePageAdapter.updateRes(homePageBean.getDataBean().getFeed().getEntry());
+                mHomePageRefresh.setRefreshing(false);
+                if (!isCheck) {
+                    addRadioButton();
+                    isCheck = true;
+                    ((RadioButton) mRadioGroup.getChildAt(0)).setChecked(true);
+                    mPresenter.getViewPager(getResources().getDisplayMetrics().widthPixels,
+                            mHomeViewPager.getLayoutParams().height, getContext(), homePageBean);
+                    for (int i = 0; i < size; i++) {
+                        url.add(homePageBean.getDataBean().getSlide().get(i).getUrl());
+                    }
+                }
+                mMoreType.setText(homePageBean.getDataBean().getComment_entry().getTitle());
+                break;
+            case END:
+                mHomePageAdapter.addRes(homePageBean.getDataBean().getFeed().getEntry());
+                break;
+        }
+    }
+
+    @Override
+    public void returnViewPager(List<ImageView> list) {
+        ((HomeViewPagerAdapter) mHomeViewPager.getAdapter()).upDate(list);
+        mHomeViewPager.setCurrentItem(currentPagerIndex);
+        mHandler.sendEmptyMessageDelayed(VIEWPAGER_H, 2000);
+    }
+
+    @Override
+    public void OnStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
+    }
+
+    @Override
+    public void onRefresh() {
+        page = 1;
+        mPresenter.getHomePageBean(State.START, page);
+    }
+
+    private void addRadioButton() {
+        for (int i = 0; i < mPagerSize; i++) {
+            RadioButton button = new RadioButton(getContext());
+            button.setButtonDrawable(null);
+            int height = mRadioGroup.getLayoutParams().height;
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(height, height);
+            StateListDrawable drawable = new StateListDrawable();
+            drawable.addState(new int[]{android.R.attr.state_checked}, getResources().getDrawable(R.mipmap.homepage_radio_wh));
+            drawable.addState(new int[]{-android.R.attr.state_checked}, getResources().getDrawable(R.mipmap.homepage_radio_gray));
+            button.setBackgroundDrawable(drawable);
+            layoutParams.setMargins(height, 0, height, 0);//4个参数按顺序分别是左上右下
+            button.setLayoutParams(layoutParams);
+            button.setPadding(height, 0, height, 0);
+            mRadioGroup.addView(button);
+        }
+    }
+
+    @Override
+    public boolean handleMessage(Message message) {
+        switch (message.what) {
+            case VIEWPAGER_H:
+                int i = mHomeViewPager.getCurrentItem();
+                mHomeViewPager.setCurrentItem(++i);
+                mHandler.sendEmptyMessageDelayed(VIEWPAGER_H, 2000);
+                break;
+        }
+        return false;
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+//        Log.e(TAG, "onPageSelected: position:"+position );
+//        Log.e(TAG, "onPageSelected:  currentItem:"+mHomeViewPager.getCurrentItem()  );
+        if (position == mPagerSize + 1) {
+            ((RadioButton) mRadioGroup.getChildAt(position - mPagerSize - 1)).setChecked(true);
+        } else if (position == 0) {
+            ((RadioButton) mRadioGroup.getChildAt(mPagerSize - 1)).setChecked(true);
+        } else {
+            ((RadioButton) mRadioGroup.getChildAt(position - 1)).setChecked(true);
+        }
+        mHandler.removeMessages(VIEWPAGER_H);
+        mHandler.sendEmptyMessageDelayed(VIEWPAGER_H, 2000);
+
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+        switch (scrollState) {
+            case SCROLL_STATE_IDLE:
+                if (isBottom && isCheck) {
+                    footer.setVisibility(View.VISIBLE);
+                    LoadAnimation.LoadingAnimation(footer, true);
+                    mPresenter.getHomePageBean(State.END, ++page);
+                } else {
+                    footer.setVisibility(View.GONE);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        isBottom = firstVisibleItem + visibleItemCount == totalItemCount;
+    }
+
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        if (state == SCROLL_STATE_IDLE) {
+            int position = mHomeViewPager.getCurrentItem();
+//            Log.e(TAG, "onPageScrollStateChanged: "+position );
+            if (position == mHomeViewPager.getAdapter().getCount() - 1) {
+                mHomeViewPager.setCurrentItem(1, false);
+            } else if (position == 0) {
+                mHomeViewPager.setCurrentItem(mHomeViewPager.getAdapter().getCount() - 2, false);
+            }
+        }
+        mHandler.removeMessages(VIEWPAGER_H);
+        mHandler.sendEmptyMessageDelayed(VIEWPAGER_H, 2000);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if (i == 0) {
+            Log.e(TAG, "onItemClick: " + mHomeViewPager.getCurrentItem());
+        }
+        Intent intent = new Intent(getContext(), DestinationActivity.class);
+        intent.putExtra("url", mHomePageAdapter.getItem(i - 1).getUrl());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(HomePageEnentBus event) {
+        Intent intent = new Intent(getContext(), DestinationActivity.class);
+        intent.putExtra("url", url.get(event.getPage()));
+        startActivity(intent);
+    }
+
+}

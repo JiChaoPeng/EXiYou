@@ -1,0 +1,236 @@
+package jcp.com.exiyou.ui.destination.fragment;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseFragment;
+import jcp.com.exiyou.ui.citysite.activity.CityActivity;
+import jcp.com.exiyou.ui.countrysite.activity.CountryActivity;
+import jcp.com.exiyou.ui.destination.adapters.DestinationCityListAdapter;
+import jcp.com.exiyou.ui.destination.adapters.DestinationLeftAdapter;
+import jcp.com.exiyou.ui.destination.bean.DestinationCityBean;
+import jcp.com.exiyou.ui.destination.bean.DestinationListBean;
+import jcp.com.exiyou.ui.destination.contract.DestinationContract;
+import jcp.com.exiyou.ui.destination.model.DestinationModel;
+import jcp.com.exiyou.ui.destination.presenter.DestinationPresenter;
+
+/**
+ * Created by 超鹏 on 2017/3/27.
+ * //                            _ooOoo_
+ * //                           o8888888o
+ * //                           88" . "88
+ * //                           (| -_- |)
+ * //                            O\ = /O
+ * //                        ____/`---'\____
+ * //                      .   ' \\| |// `.
+ * //                       / \\||| : |||// \
+ * //                     / _||||| -:- |||||- \
+ * //                       | | \\\ - /// | |
+ * //                     | \_| ''\---/'' | |
+ * //                      \ .-\__ `-` ___/-. /
+ * //                   ___`. .' /--.--\ `. . __
+ * //                ."" '< `.___\_<|>_/___.' >'"".
+ * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+ * //                 \ \ `-. \_ __\ /__ _/ .-` / /
+ * //         ======`-.____`-.___\_____/___.-`____.-'======
+ * //                            `=---='
+ * //         .............................................
+ * //
+ * //            佛祖镇楼                  BUG辟易
+ * 佛曰:
+ * 写字楼里写字间，写字间里程序员；程序人员写程序，又拿程序换酒钱。酒醒只在网上坐，酒醉还来网下眠；酒醉酒醒日复日，网上网下年复年。
+ * 宁愿老死程序间，只要老板多发钱；小车大房不去想，撰个二千好过年。若要见识新世面，公务员比程序员；一个在天一在地，而且还比我们闲。
+ * 别人看我穿白领，我看别人穿名牌；天生我才写程序，臀大近视肩周炎。年复一年春光度，度得他人做老板；老板扣我薄酒钱，没有酒钱怎过年。
+ * 春光逝去皱纹起，作起程序也委靡；来到水源把水灌，打死不做程序员。别人笑我忒疯癫，我笑他人命太贱；状元三百六十行，偏偏来做程序员。
+ * 但愿老死电脑间，不愿鞠躬老板前；奔驰宝马贵者趣，公交自行程序员。别人笑我忒疯癫，我笑自己命太贱；不见满街漂亮妹，哪个归得程序员。
+ * 不想只挣打工钱，那个老板愿发钱；小车大房咱要想，任我享用多悠闲。比尔能搞个微软，我咋不能捞点钱；一个在天一在地，定有一日乾坤翻。
+ * 我在天来他在地，纵横天下山水间；傲视武林豪杰墓，一樽还垒风月山。电脑面前眼发直，眼镜下面泪茫茫；做梦发财好几亿，从此不用手指忙。
+ * 哪知梦醒手空空，老板看到把我训；待到老时眼发花，走路不知哪是家。小农村里小民房，小民房里小民工；小民工人写程序，又拿代码讨赏钱。
+ * 钱空只在代码中，钱醉仍在代码间；有钱无钱日复日，码上码下年复年。但愿老死代码间，不愿鞠躬奥迪前，奥迪奔驰贵者趣，程序代码贫者缘。
+ * 若将贫贱比贫者，一在平地一在天；若将贫贱比车马，他得驱驰我得闲。别人笑我忒疯癫，我笑他人看不穿；不见盖茨两手间，财权富贵世人鉴。
+ */
+
+public class DestinationFragment extends BaseFragment<DestinationPresenter, DestinationModel> implements DestinationContract.DestinationView, AdapterView.OnItemClickListener {
+    private static final String TAG = DestinationFragment.class.getSimpleName();
+    @BindView(R2.id.destination_city_list)
+    GridView mCityList;
+    @BindView(R2.id.destination_listview)
+    ListView mLeftListView;
+    @BindView(R2.id.destination_city_num)
+    TextView mCityNum;
+    @BindView(R2.id.destination_title)
+    TextView mTilte;
+    @BindView(R.id.destination_country_num)
+    TextView mCountyNum;
+    private DestinationCityListAdapter mAdapter;
+    private DestinationLeftAdapter mLeftAdapter;
+    private int position=0;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor mEditor;
+        private List<String> list = new ArrayList<>();
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_destination;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setMV(mModel, this);
+
+    }
+
+    @Override
+    public void initView() {
+//        mLeftListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        sharedPreferences=getContext().getSharedPreferences("image", Context.MODE_PRIVATE);
+        mEditor=sharedPreferences.edit();
+        mPresenter.getMovieList();
+        mAdapter = new DestinationCityListAdapter(getContext(), null, R.layout.destination_city_list_item, R.layout.destination_country);
+        mLeftAdapter = new DestinationLeftAdapter(getContext(), null, null, R.layout.destination_left_item);
+        mCityList.setAdapter(mAdapter);
+        mLeftListView.setAdapter(mLeftAdapter);
+        mLeftListView.setOnItemClickListener(this);
+        mCityList.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void retrunList(final DestinationListBean listBean) {
+        Log.e(TAG, "retrunList: " + listBean.getData().size());
+        mLeftAdapter.updateRes(listBean.getData());
+        mLeftListView.performItemClick(mLeftListView, 0, mLeftAdapter.getItemId(0));
+    }
+
+    @Override
+    public void OnStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (adapterView.getId()) {
+            case R.id.destination_listview:
+                position=i;
+                List<DestinationCityBean> cityList = mLeftAdapter.getItem(i).getTagdata().getCitylist();
+                if (cityList.size() % 2 == 0) {
+                    mAdapter.updateRes(mLeftAdapter.getItem(i).getTagdata());
+                } else {
+                    DestinationCityBean cityBean = new DestinationCityBean();
+                    cityBean.setFlag(0);
+                    cityBean.setCnname("");
+                    cityBean.setEnname("");
+                    cityBean.setPhoto("");
+                    cityList.add(cityList.size(), cityBean);
+                    for (int j = 0; j < cityList.size(); j++) {
+                        Log.e(TAG, "onItemClick: " + mLeftAdapter.getItem(i).getTagdata().getCitylist().get(j).getCnname());
+                    }
+                    mAdapter.updateRes(mLeftAdapter.getItem(i).getTagdata());
+                }
+                int countryCount = mLeftAdapter.getItem(i).getTagdata().getCountrycount();
+                if (countryCount == 0) {
+                    mCountyNum.setText("");
+                    mTilte.setText(mLeftAdapter.getItem(i).getTagname());
+                    mCityNum.setText(mLeftAdapter.getItem(i).getTagdata().getCitycount() + "个城市");
+                } else {
+                    mCountyNum.setText(mLeftAdapter.getItem(i).getTagdata().getCountrycount() + "个国家");
+                    mTilte.setText(mLeftAdapter.getItem(i).getTagname());
+                    mCityNum.setText(mLeftAdapter.getItem(i).getTagdata().getCitycount() + "个城市");
+                }
+                break;
+            case R.id.destination_city_list:
+                if (i>=mLeftAdapter.getItem(position).getTagdata().getCitycount()){
+                    int p=i-(mLeftAdapter.getItem(position).getTagdata().getCitycount());
+                    Log.e(TAG, "onItemClick: "+p);
+                    Intent intent = new Intent(getContext(), CountryActivity.class);
+                    intent.putExtra("city",mLeftAdapter.getItem(position).getTagdata().getCountrylist().get(p).getId());
+                    startActivity(intent);
+
+                }else{
+                    initMap(String.valueOf(mLeftAdapter.getItem(position).getTagdata().
+                            getCitylist().get(i).getId()),mLeftAdapter.getItem(position).getTagdata().
+                            getCitylist().get(i).getCnname(),mLeftAdapter.getItem(position).getTagdata().
+                            getCitylist().get(i).getPhoto());
+                    Intent intent = new Intent(getContext(), CityActivity.class);
+                    intent.putExtra("city",String.valueOf(mLeftAdapter.getItem(position).getTagdata().
+                            getCitylist().get(i).getId()));
+                    startActivity(intent);
+                }
+                break;
+        }
+
+    }
+
+    private void initMap(String id,String name,String image) {
+       List<String>  strings=new ArrayList<>();
+        if (list.contains(name)){
+            int size = list.size();
+            for (int i = 0; i < size; i++) {
+                if (i==0||list.get(i)==name||list.get(i)==id){
+                }else{
+                    strings.add(list.get(i));
+                }
+            }
+            mEditor.putString("image",image);
+            mEditor.putString("site1",name);
+            mEditor.putString("site1id",id);
+            mEditor.putString("site2",strings.get(0));
+            mEditor.putString("site2id",strings.get(1));
+            mEditor.putString("site3",strings.get(2));
+            mEditor.putString("site3id",strings.get(3));
+            mEditor.putString("site4",strings.get(4));
+            mEditor.putString("site4id",strings.get(5));
+        }else{
+            mEditor.putString("image",image);
+            mEditor.putString("site1",name);
+            mEditor.putString("site1id",id);
+            mEditor.putString("site2",list.get(1));
+            mEditor.putString("site2id",list.get(2));
+            mEditor.putString("site3",list.get(3));
+            mEditor.putString("site3id",list.get(4));
+            mEditor.putString("site4",list.get(5));
+            mEditor.putString("site4id",list.get(6));
+        }
+
+        mEditor.commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (list!=null){
+            list.clear();
+        }
+        list.add(sharedPreferences.getString("image", "http://pic1.qyer.com/album/user/370/89/Qk5VShMOaA/index/339x2260"));
+        list.add(sharedPreferences.getString("site1", "香港"));
+        list.add(sharedPreferences.getString("site1id", "50"));
+        list.add(sharedPreferences.getString("site2", "澳门"));
+        list.add(sharedPreferences.getString("site2id", "51"));
+        list.add(sharedPreferences.getString("site3", "巴黎"));
+        list.add(sharedPreferences.getString("site3id", "20"));
+        list.add(sharedPreferences.getString("site4", "迪拜"));
+        list.add(sharedPreferences.getString("site4id", "6406"));
+    }
+}

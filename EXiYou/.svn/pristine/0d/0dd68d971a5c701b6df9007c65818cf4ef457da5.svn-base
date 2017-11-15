@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_enter_into_jump"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="jcp.com.exiyou.ui.community.activitys.EnterIntoJumpActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/color_green_tab"
+        app:layout_collapseMode="pin">
+
+        <ImageView
+            android:id="@+id/activity_enter_into_jump_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/ic_back_white" />
+
+        <TextView
+            android:id="@+id/activity_enter_into_jump_toolBar_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/activity_enter_into_jump_back"
+            android:text="toolBarName"
+            android:textColor="@color/color_white"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/activity_enter_into_jump_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/ic_search" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/color_white">
+
+        <ImageView
+            android:id="@+id/activity_enter_into_jump_photo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/ic_qyer_gray_120" />
+
+        <TextView
+            android:id="@+id/activity_enter_into_jump_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/activity_enter_into_jump_photo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/activity_enter_into_jump_photo"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="name"
+            android:textColor="@color/color_black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/activity_enter_into_jump_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/activity_enter_into_jump_photo"
+            android:layout_alignLeft="@id/activity_enter_into_jump_name"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="description"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="6dp"
+            android:layout_alignTop="@id/activity_enter_into_jump_description"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/activity_enter_into_jump_description"
+            android:background="@color/color_black_alpha_9" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="6dp"
+            android:layout_alignBottom="@id/activity_enter_into_jump_description"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/activity_enter_into_jump_description"
+            android:background="@color/color_black_alpha_9" />
+
+        <TextView
+            android:id="@+id/activity_enter_into_jump_total_threads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/activity_enter_into_jump_description"
+            android:layout_marginLeft="11dp"
+            android:layout_toRightOf="@id/activity_enter_into_jump_description"
+            android:text="total_threads"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_enter_into_jump_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/color_black_alpha_3" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:background="@color/color_white"
+            android:elevation="10dp"
+            app:layout_scrollFlags="scroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/activity_enter_into_jump_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.6"
+                    app:tabIndicatorColor="@color/color_green_tab"
+                    app:tabIndicatorHeight="3dp"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/color_green_tab"
+                    app:tabTextColor="@color/color_black_alpha_9" />
+
+                <View
+                    android:layout_width="0.2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_black_alpha_3" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableRight="@mipmap/ic_screen_funnel"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="15dp"
+                    android:text="筛选"
+                    android:textColor="@color/color_black" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/activity_enter_into_jump_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_gray" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

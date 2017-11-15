@@ -1,0 +1,631 @@
+package jcp.com.exiyou.ui.shoppingmall.bean;
+
+import java.util.List;
+
+/**
+ * Created by 周强 on 2017/3/30.
+ */
+
+public class ShopSearchListBean {
+
+    private int status;
+    private String info;
+    private int times;
+    private DataBean data;
+    private ExtraBeanX extra;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public int getTimes() {
+        return times;
+    }
+
+    public void setTimes(int times) {
+        this.times = times;
+    }
+
+    public DataBean getData() {
+        return data;
+    }
+
+    public void setData(DataBean data) {
+        this.data = data;
+    }
+
+    public ExtraBeanX getExtra() {
+        return extra;
+    }
+
+    public void setExtra(ExtraBeanX extra) {
+        this.extra = extra;
+    }
+
+    public static class DataBean {
+
+        private int total;
+        private FiltersBean filters;
+        private Object debug;
+        private List<ListBeanX> list;
+
+        public int getTotal() {
+            return total;
+        }
+
+        public void setTotal(int total) {
+            this.total = total;
+        }
+
+        public FiltersBean getFilters() {
+            return filters;
+        }
+
+        public void setFilters(FiltersBean filters) {
+            this.filters = filters;
+        }
+
+        public Object getDebug() {
+            return debug;
+        }
+
+        public void setDebug(Object debug) {
+            this.debug = debug;
+        }
+
+        public List<ListBeanX> getList() {
+            return list;
+        }
+
+        public void setList(List<ListBeanX> list) {
+            this.list = list;
+        }
+
+        public static class FiltersBean {
+
+            private IntentionBean intention;
+            private String tips;
+            private SegmentationBean segmentation;
+            private List<PoiBean> poi;
+            private List<TypeBean> type;
+            private List<ExtraBean> extra;
+            private List<OrderBean> order;
+
+            public IntentionBean getIntention() {
+                return intention;
+            }
+
+            public void setIntention(IntentionBean intention) {
+                this.intention = intention;
+            }
+
+            public String getTips() {
+                return tips;
+            }
+
+            public void setTips(String tips) {
+                this.tips = tips;
+            }
+
+            public SegmentationBean getSegmentation() {
+                return segmentation;
+            }
+
+            public void setSegmentation(SegmentationBean segmentation) {
+                this.segmentation = segmentation;
+            }
+
+            public List<PoiBean> getPoi() {
+                return poi;
+            }
+
+            public void setPoi(List<PoiBean> poi) {
+                this.poi = poi;
+            }
+
+            public List<TypeBean> getType() {
+                return type;
+            }
+
+            public void setType(List<TypeBean> type) {
+                this.type = type;
+            }
+
+            public List<ExtraBean> getExtra() {
+                return extra;
+            }
+
+            public void setExtra(List<ExtraBean> extra) {
+                this.extra = extra;
+            }
+
+            public List<OrderBean> getOrder() {
+                return order;
+            }
+
+            public void setOrder(List<OrderBean> order) {
+                this.order = order;
+            }
+
+            public static class IntentionBean {
+            }
+
+            public static class SegmentationBean {
+            }
+
+            public static class PoiBean {
+                /**
+                 * value :
+                 * name : 全部目的地
+                 * key : keyword
+                 * country : [{"value":"亚洲","name":"亚洲全部","key":"keyword"},{"value":215,"name":"泰国","key":"country_id","city_list":[{"value":215,"name":"泰国全部","key":"country_id"},{"value":8845,"name":"普吉岛","key":"city_id"},{"value":55,"name":"曼谷","key":"city_id"},{"value":54,"name":"清迈","key":"city_id"},{"value":8858,"name":"苏梅岛","key":"city_id"},{"value":8804,"name":"芭堤雅","key":"city_id"},{"value":8823,"name":"甲米","key":"city_id"},{"value":8849,"name":"清莱","key":"city_id"},{"value":8806,"name":"拜县","key":"city_id"},{"value":8822,"name":"华欣","key":"city_id"},{"value":8867,"name":"泰国象岛","key":"city_id"},{"value":10486,"name":"沙美岛","key":"city_id"},{"value":8860,"name":"素叻他尼","key":"city_id"},{"value":8805,"name":"巴蜀府","key":"city_id"},{"value":10509,"name":"丽贝岛","key":"city_id"},{"value":8814,"name":"大城","key":"city_id"},{"value":10506,"name":"斯米兰群岛","key":"city_id"}]},{"value":497,"name":"马尔代夫","key":"country_id","city_list":[{"value":497,"name":"马尔代夫全部","key":"country_id"},{"value":7789,"name":"马尔代夫","key":"city_id"},{"value":10123,"name":"马累","key":"city_id"}]},{"value":11,"name":"中国","key":"country_id","city_list":[{"value":11,"name":"中国全部","key":"country_id"},{"value":50,"name":"香港","key":"city_id"},{"value":12259,"name":"三亚","key":"city_id"},{"value":51,"name":"澳门","key":"city_id"},{"value":11800,"name":"成都","key":"city_id"},{"value":12486,"name":"厦门","key":"city_id"},{"value":11809,"name":"丽江","key":"city_id"},{"value":11862,"name":"九寨沟","key":"city_id"},{"value":11186,"name":"台湾","key":"city_id"},{"value":11899,"name":"西安","key":"city_id"},{"value":11854,"name":"都江堰","key":"city_id"},{"value":11831,"name":"青城山","key":"city_id"},{"value":11731,"name":"桂林","key":"city_id"},{"value":52,"name":"台北","key":"city_id"},{"value":11815,"name":"乐山","key":"city_id"},{"value":11596,"name":"重庆","key":"city_id"},{"value":11856,"name":"峨眉山","key":"city_id"},{"value":12190,"name":"珠海","key":"city_id"},{"value":12013,"name":"北海市","key":"city_id"},{"value":11790,"name":"大理","key":"city_id"},{"value":11595,"name":"上海","key":"city_id"},{"value":11690,"name":"杭州","key":"city_id"},{"value":11711,"name":"武汉","key":"city_id"},{"value":11799,"name":"昆明","key":"city_id"},{"value":11808,"name":"广州","key":"city_id"},{"value":11609,"name":"长白山","key":"city_id"},{"value":12489,"name":"福州","key":"city_id"},{"value":12111,"name":"香格里拉","key":"city_id"},{"value":12113,"name":"泸沽湖","key":"city_id"},{"value":12189,"name":"深圳","key":"city_id"},{"value":11747,"name":"贵阳","key":"city_id"},{"value":11594,"name":"天津","key":"city_id"},{"value":12230,"name":"揭阳","key":"city_id"},{"value":12068,"name":"长沙","key":"city_id"},{"value":12480,"name":"无锡","key":"city_id"},{"value":11698,"name":"青岛","key":"city_id"},{"value":11645,"name":"大连","key":"city_id"},{"value":12211,"name":"湛江","key":"city_id"},{"value":12479,"name":"南京","key":"city_id"},{"value":12487,"name":"鼓浪屿","key":"city_id"},{"value":12260,"name":"海口","key":"city_id"},{"value":11593,"name":"北京","key":"city_id"},{"value":9819,"name":"高雄市","key":"city_id"},{"value":9820,"name":"垦丁","key":"city_id"},{"value":11714,"name":"拉萨","key":"city_id"},{"value":11863,"name":"五台山","key":"city_id"},{"value":12038,"name":"九华山","key":"city_id"},{"value":11715,"name":"张家界市","key":"city_id"},{"value":12014,"name":"南宁","key":"city_id"},{"value":11687,"name":"黄山市","key":"city_id"}]},{"value":213,"name":"马来西亚","key":"country_id","city_list":[{"value":213,"name":"马来西亚全部","key":"country_id"},{"value":7824,"name":"沙巴","key":"city_id"},{"value":7837,"name":"亚庇","key":"city_id"},{"value":7820,"name":"兰卡威","key":"city_id"},{"value":7801,"name":"槟城","key":"city_id"},{"value":10159,"name":"仙本那","key":"city_id"},{"value":53,"name":"吉隆坡","key":"city_id"},{"value":9908,"name":"热浪岛","key":"city_id"},{"value":9960,"name":"卡帕莱","key":"city_id"},{"value":10462,"name":"浪中岛","key":"city_id"}]},{"value":216,"name":"越南","key":"country_id","city_list":[{"value":216,"name":"越南全部","key":"country_id"},{"value":9774,"name":"芽庄","key":"city_id"},{"value":9909,"name":"岘港","key":"city_id"},{"value":57,"name":"胡志明市","key":"city_id"},{"value":56,"name":"河内","key":"city_id"},{"value":10145,"name":"富国岛","key":"city_id"},{"value":9773,"name":"下龙湾","key":"city_id"},{"value":9738,"name":"大叻","key":"city_id"},{"value":9770,"name":"头顿","key":"city_id"},{"value":10490,"name":"越南沙巴","key":"city_id"},{"value":9911,"name":"美奈","key":"city_id"}]},{"value":14,"name":"日本","key":"country_id","city_list":[{"value":14,"name":"日本全部","key":"country_id"},{"value":63,"name":"东京","key":"city_id"},{"value":8532,"name":"冲绳","key":"city_id"},{"value":8603,"name":"大阪","key":"city_id"},{"value":11187,"name":"北海道","key":"city_id"},{"value":8616,"name":"札幌","key":"city_id"},{"value":8588,"name":"日本松山","key":"city_id"},{"value":13870,"name":"冲绳市","key":"city_id"},{"value":8567,"name":"名古屋","key":"city_id"},{"value":65,"name":"京都","key":"city_id"},{"value":8568,"name":"那霸","key":"city_id"},{"value":8543,"name":"高松市","key":"city_id"},{"value":8537,"name":"福冈市","key":"city_id"},{"value":8606,"name":"熊本市","key":"city_id"},{"value":10498,"name":"茨城县","key":"city_id"},{"value":8622,"name":"佐贺市","key":"city_id"},{"value":10400,"name":"北九州市","key":"city_id"},{"value":8618,"name":"长崎","key":"city_id"}]},{"value":570,"name":"印度尼西亚","key":"country_id","city_list":[{"value":570,"name":"印度尼西亚全部","key":"country_id"},{"value":9492,"name":"巴厘岛","key":"city_id"},{"value":9534,"name":"美娜多","key":"city_id"},{"value":10430,"name":"蓝梦岛","key":"city_id"},{"value":9508,"name":"库塔","key":"city_id"},{"value":15095,"name":"乌鲁瓦图","key":"city_id"},{"value":10426,"name":"民丹岛","key":"city_id"},{"value":9535,"name":"巴厘岛乌布","key":"city_id"}]},{"value":446,"name":"菲律宾","key":"country_id","city_list":[{"value":446,"name":"菲律宾全部","key":"country_id"},{"value":7286,"name":"长滩岛","key":"city_id"},{"value":7267,"name":"杜马盖地","key":"city_id"},{"value":7264,"name":"薄荷岛","key":"city_id"},{"value":7280,"name":"宿雾市","key":"city_id"},{"value":7262,"name":"巴拉望岛","key":"city_id"}]},{"value":232,"name":"新加坡","key":"country_id","city_list":[{"value":232,"name":"新加坡全部","key":"country_id"},{"value":62,"name":"新加坡","key":"city_id"}]},{"value":219,"name":"柬埔寨","key":"country_id","city_list":[{"value":219,"name":"柬埔寨全部","key":"country_id"},{"value":58,"name":"暹粒","key":"city_id"},{"value":7668,"name":"西哈努克市","key":"city_id"},{"value":7661,"name":"金边","key":"city_id"}]},{"value":402,"name":"阿联酋","key":"country_id","city_list":[{"value":402,"name":"阿联酋全部","key":"country_id"},{"value":6406,"name":"迪拜","key":"city_id"},{"value":6403,"name":"阿布扎比","key":"city_id"},{"value":10143,"name":"沙迦","key":"city_id"}]},{"value":537,"name":"斯里兰卡","key":"country_id","city_list":[{"value":537,"name":"斯里兰卡全部","key":"country_id"},{"value":8710,"name":"科伦坡","key":"city_id"},{"value":8709,"name":"斯里兰卡康堤","key":"city_id"}]},{"value":558,"name":"文莱","key":"country_id","city_list":[{"value":558,"name":"文莱全部","key":"country_id"}]},{"value":487,"name":"老挝","key":"country_id","city_list":[{"value":487,"name":"老挝全部","key":"country_id"},{"value":7731,"name":"琅勃拉邦","key":"city_id"},{"value":7735,"name":"万象","key":"city_id"}]},{"value":231,"name":"印度","key":"country_id","city_list":[{"value":231,"name":"印度全部","key":"country_id"},{"value":9427,"name":"德里","key":"city_id"},{"value":9487,"name":"斋普尔","key":"city_id"},{"value":61,"name":"阿格拉","key":"city_id"},{"value":9478,"name":"瓦拉纳西","key":"city_id"}]},{"value":511,"name":"缅甸","key":"country_id","city_list":[{"value":511,"name":"缅甸全部","key":"country_id"},{"value":8276,"name":"仰光","key":"city_id"}]},{"value":220,"name":"尼泊尔","key":"country_id","city_list":[{"value":220,"name":"尼泊尔全部","key":"country_id"},{"value":59,"name":"加德满都","key":"city_id"}]},{"value":568,"name":"伊朗","key":"country_id","city_list":[{"value":568,"name":"伊朗全部","key":"country_id"},{"value":9246,"name":"德黑兰","key":"city_id"},{"value":9249,"name":"亚兹德","key":"city_id"},{"value":9250,"name":"设拉子","key":"city_id"},{"value":9251,"name":"卡尚","key":"city_id"},{"value":9252,"name":"伊斯法罕","key":"city_id"}]}]
+                 */
+
+                private String value;
+                private String name;
+                private String key;
+                private List<CountryBean> country;
+
+                public String getValue() {
+                    return value;
+                }
+
+                public void setValue(String value) {
+                    this.value = value;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getKey() {
+                    return key;
+                }
+
+                public void setKey(String key) {
+                    this.key = key;
+                }
+
+                public List<CountryBean> getCountry() {
+                    return country;
+                }
+
+                public void setCountry(List<CountryBean> country) {
+                    this.country = country;
+                }
+
+                public static class CountryBean {
+
+                    private String value;
+                    private String name;
+                    private String key;
+                    private List<CityListBean> city_list;
+
+                    public String getValue() {
+                        return value;
+                    }
+
+                    public void setValue(String value) {
+                        this.value = value;
+                    }
+
+                    public String getName() {
+                        return name;
+                    }
+
+                    public void setName(String name) {
+                        this.name = name;
+                    }
+
+                    public String getKey() {
+                        return key;
+                    }
+
+                    public void setKey(String key) {
+                        this.key = key;
+                    }
+
+                    public List<CityListBean> getCity_list() {
+                        return city_list;
+                    }
+
+                    public void setCity_list(List<CityListBean> city_list) {
+                        this.city_list = city_list;
+                    }
+
+                    public static class CityListBean {
+                        @Override
+                        public String toString() {
+                            return "CityListBean{" +
+                                    "value=" + value +
+                                    ", name='" + name + '\'' +
+                                    ", key='" + key + '\'' +
+                                    '}';
+                        }
+
+                        /**
+                         * value : 215
+                         * name : 泰国全部
+                         * key : country_id
+                         */
+
+                        private int value;
+                        private String name;
+                        private String key;
+
+                        public int getValue() {
+                            return value;
+                        }
+
+                        public void setValue(int value) {
+                            this.value = value;
+                        }
+
+                        public String getName() {
+                            return name;
+                        }
+
+                        public void setName(String name) {
+                            this.name = name;
+                        }
+
+                        public String getKey() {
+                            return key;
+                        }
+
+                        public void setKey(String key) {
+                            this.key = key;
+                        }
+                    }
+                }
+            }
+
+            public static class TypeBean {
+                /**
+                 * text :
+                 * types : [{"id":0,"type":1,"catename":"全部商品","status":1,"icon":"http://static.qyer.com/m/common/ui/discount_icon/discount_icon_0.png?1"}]
+                 */
+
+                private String text;
+                private List<TypesBean> types;
+
+                public String getText() {
+                    return text;
+                }
+
+                public void setText(String text) {
+                    this.text = text;
+                }
+
+                public List<TypesBean> getTypes() {
+                    return types;
+                }
+
+                public void setTypes(List<TypesBean> types) {
+                    this.types = types;
+                }
+
+                public static class TypesBean {
+                    /**
+                     * id : 0
+                     * type : 1
+                     * catename : 全部商品
+                     * status : 1
+                     * icon : http://static.qyer.com/m/common/ui/discount_icon/discount_icon_0.png?1
+                     */
+
+                    private int id;
+                    private int type;
+                    private String catename;
+                    private int status;
+                    private String icon;
+
+                    public int getId() {
+                        return id;
+                    }
+
+                    public void setId(int id) {
+                        this.id = id;
+                    }
+
+                    public int getType() {
+                        return type;
+                    }
+
+                    public void setType(int type) {
+                        this.type = type;
+                    }
+
+                    public String getCatename() {
+                        return catename;
+                    }
+
+                    public void setCatename(String catename) {
+                        this.catename = catename;
+                    }
+
+                    public int getStatus() {
+                        return status;
+                    }
+
+                    public void setStatus(int status) {
+                        this.status = status;
+                    }
+
+                    public String getIcon() {
+                        return icon;
+                    }
+
+                    public void setIcon(String icon) {
+                        this.icon = icon;
+                    }
+                }
+            }
+
+            public static class ExtraBean {
+                /**
+                 * name : 出发地
+                 * key : source_place
+                 * type : avg
+                 * arrange : 0
+                 * limit : 0
+                 * list : [{"label":"全部","value":""},{"label":"上海/杭州","value":"shhz"},{"label":"北京/天津","value":"bjtj"},{"label":"广州/深圳","value":"gzsz"},{"label":"港澳台","value":"hmt"},{"label":"国内其他","value":"inland"},{"label":"成都/重庆","value":"cdcq"},{"label":"海外","value":"abroad"}]
+                 */
+
+                private String name;
+                private String key;
+                private String type;
+                private int arrange;
+                private int limit;
+                private List<ListBean> list;
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getKey() {
+                    return key;
+                }
+
+                public void setKey(String key) {
+                    this.key = key;
+                }
+
+                public String getType() {
+                    return type;
+                }
+
+                public void setType(String type) {
+                    this.type = type;
+                }
+
+                public int getArrange() {
+                    return arrange;
+                }
+
+                public void setArrange(int arrange) {
+                    this.arrange = arrange;
+                }
+
+                public int getLimit() {
+                    return limit;
+                }
+
+                public void setLimit(int limit) {
+                    this.limit = limit;
+                }
+
+                public List<ListBean> getList() {
+                    return list;
+                }
+
+                public void setList(List<ListBean> list) {
+                    this.list = list;
+                }
+
+                public static class ListBean {
+                    /**
+                     * label : 全部
+                     * value :
+                     */
+
+                    private String label;
+                    private String value;
+
+                    public String getLabel() {
+                        return label;
+                    }
+
+                    public void setLabel(String label) {
+                        this.label = label;
+                    }
+
+                    public String getValue() {
+                        return value;
+                    }
+
+                    public void setValue(String value) {
+                        this.value = value;
+                    }
+                }
+            }
+
+            public static class OrderBean {
+                /**
+                 * id : 0
+                 * order_name : 智能排序
+                 */
+
+                private int id;
+                private String order_name;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getOrder_name() {
+                    return order_name;
+                }
+
+                public void setOrder_name(String order_name) {
+                    this.order_name = order_name;
+                }
+            }
+        }
+
+        public static class ListBeanX {
+            @Override
+            public String toString() {
+                return "ListBeanX{" +
+                        "id=" + id +
+                        ", title='" + title +"}";
+            }
+
+            /**
+             * id : 75440
+             * title : 多地出发马尔代夫班度士岛6-7天自由行(儿童免房费/免费儿童俱乐部/免费升级早晚餐/可配全国免费联运)
+             * price : 5899
+             * priceoff :
+             * sold : 已售35件
+             * mark : 北京、上海等地 - 马尔代夫
+             * photo : http://pic.qyer.com/public/supplier/lastminute/2016/08/19/14716060189203/600x400
+             * promotxt :
+             * tags : []
+             * url : http://m.qyer.com/z/deal/75440/?strategy=psorder&ra_arg=213f7e03554abdc569cf9d90d0bab5e998947a816e5c10953aa42278d29e0910
+             */
+
+
+
+            private int id;
+            private String title;
+            private String price;
+            private String priceoff;
+            private String sold;
+            private String mark;
+            private String photo;
+            private String promotxt;
+            private String url;
+            private List<?> tags;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getPrice() {
+                return price;
+            }
+
+            public void setPrice(String price) {
+                this.price = price;
+            }
+
+            public String getPriceoff() {
+                return priceoff;
+            }
+
+            public void setPriceoff(String priceoff) {
+                this.priceoff = priceoff;
+            }
+
+            public String getSold() {
+                return sold;
+            }
+
+            public void setSold(String sold) {
+                this.sold = sold;
+            }
+
+            public String getMark() {
+                return mark;
+            }
+
+            public void setMark(String mark) {
+                this.mark = mark;
+            }
+
+            public String getPhoto() {
+                return photo;
+            }
+
+            public void setPhoto(String photo) {
+                this.photo = photo;
+            }
+
+            public String getPromotxt() {
+                return promotxt;
+            }
+
+            public void setPromotxt(String promotxt) {
+                this.promotxt = promotxt;
+            }
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public List<?> getTags() {
+                return tags;
+            }
+
+            public void setTags(List<?> tags) {
+                this.tags = tags;
+            }
+        }
+    }
+
+    public static class ExtraBeanX {
+        /**
+         * ra_switch : 1
+         */
+
+        private int ra_switch;
+
+        public int getRa_switch() {
+            return ra_switch;
+        }
+
+        public void setRa_switch(int ra_switch) {
+            this.ra_switch = ra_switch;
+        }
+    }
+}

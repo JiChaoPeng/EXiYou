@@ -1,0 +1,42 @@
+package jcp.com.exiyou.ui.shoppingmall.adapter;
+
+
+import android.content.Context;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.base.adapters.BaseListViewAdapter;
+import jcp.com.exiyou.ui.shoppingmall.activity.ShopSearchSecondActicity;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchSecondBean;
+
+/**
+ * Created by 周强 on 2017/3/31.
+ */
+
+public class ShopSearchSecondAdapter extends BaseListViewAdapter<ShopSearchSecondBean.ShopSearchSecondList> {
+
+    private Context context;
+    private List<ShopSearchSecondBean.ShopSearchSecondList> data;
+    public static final String TAG = ShopSearchSecondActicity.class.getSimpleName();
+
+    public ShopSearchSecondAdapter(Context context, String mType, List<ShopSearchSecondBean.ShopSearchSecondList> data, int... layoutId) {
+        super(context, mType, data, layoutId);
+        this.context = context;
+        this.data = data;
+    }
+
+    @Override
+    protected void loadData(ViewHolder holder, ShopSearchSecondBean.ShopSearchSecondList item, int position) {
+        ImageView imageView = (ImageView) holder.findView(R.id.shoppage_search_listitem_image);
+        Picasso.with(context).load(item.getPhoto()).into(imageView);
+        holder.setText(R.id.shoppage_search_listitem_title,item.getTitle());
+        holder.setText(R.id.shoppage_search_listitem_sold,item.getSold());
+        holder.setText(R.id.shoppage_search_listitem_price,item.getPrice());
+        holder.setText(R.id.shoppage_search_listitem_mark,item.getMark());
+    }
+
+}

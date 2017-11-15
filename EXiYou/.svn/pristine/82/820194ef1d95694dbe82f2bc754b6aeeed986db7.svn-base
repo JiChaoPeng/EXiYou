@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/recommend_tag_qyerelite"
+            android:layout_width="130dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/recommend_tag_qyerelite_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="fitXY" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_black_alpha_3" />
+
+            <TextView
+                android:id="@+id/recommend_tag_qyerelite_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="最新精华游记"
+                android:textColor="@color/color_white" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/recommend_tag_monthlysuggest"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:id="@+id/recommend_tag_monthlysuggest_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="fitXY" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_black_alpha_3" />
+
+            <TextView
+                android:id="@+id/recommend_tag_monthlysuggest_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="最新精华游记"
+                android:textColor="@color/color_white" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/recommend_tag_activity"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:id="@+id/recommend_tag_activity_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="fitXY" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_black_alpha_3" />
+
+            <TextView
+                android:id="@+id/recommend_tag_activity_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="最新精华游记"
+                android:textColor="@color/color_white" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</HorizontalScrollView>

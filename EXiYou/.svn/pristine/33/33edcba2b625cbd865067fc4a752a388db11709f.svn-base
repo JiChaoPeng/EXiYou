@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/homepage_viewpager_layout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/homepage_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <RadioGroup
+                android:id="@+id/homepage_radio_group"
+                android:layout_width="200dp"
+                android:layout_height="15dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:src="@mipmap/ic_bbs_re"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_weight="7"
+                android:id="@+id/homepage_more_site"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textColor="@color/colorGary_6"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:src="@mipmap/qyorder_ic_arrow_right_normal"
+                android:layout_width="0dp"
+                android:layout_height="16dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <!--<LinearLayout-->
+    <!--android:id="@+id/homepage_recently_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="300dp"-->
+    <!--android:orientation="vertical">-->
+    <!--</LinearLayout>-->
+</LinearLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/guide_viewpager"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="100%" />
+
+    <ImageView
+        android:id="@+id/guide_text2"
+        android:layout_gravity="bottom|center_horizontal"
+        android:scaleType="fitXY"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="60%" />
+
+    <ImageView
+        android:id="@+id/guide_go"
+        android:layout_gravity="bottom|center_horizontal"
+        android:scaleType="fitXY"
+        android:src="@mipmap/guide_button"
+        android:visibility="gone"
+        app:layout_heightPercent="7%"
+        app:layout_marginBottomPercent="30%"
+        app:layout_widthPercent="37%" />
+
+    <ImageView
+        android:id="@+id/guide_text_logo"
+        android:layout_gravity="top|right|center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        app:layout_heightPercent="50%"
+        app:layout_widthPercent="30%" />
+
+
+</android.support.percent.PercentFrameLayout>

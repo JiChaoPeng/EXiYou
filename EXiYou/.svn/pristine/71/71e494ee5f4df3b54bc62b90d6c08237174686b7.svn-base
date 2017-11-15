@@ -1,0 +1,247 @@
+package jcp.com.exiyou.ui.countrysite.activity;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.List;
+
+import butterknife.BindView;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseActivity;
+import jcp.com.exiyou.constants.HttpParams;
+import jcp.com.exiyou.ui.countrysite.adapters.CounrtryViewPagerAdapter;
+import jcp.com.exiyou.ui.countrysite.adapters.CountryGoAdapter;
+import jcp.com.exiyou.ui.countrysite.adapters.CountryHotCityAdapter;
+import jcp.com.exiyou.ui.countrysite.adapters.CountryTicketAdapter;
+import jcp.com.exiyou.ui.countrysite.bean.CountrySiteBean;
+import jcp.com.exiyou.ui.countrysite.contract.CountryContract;
+import jcp.com.exiyou.ui.countrysite.model.CountryModel;
+import jcp.com.exiyou.ui.countrysite.persenter.CountryPresenter;
+import jcp.com.exiyou.ui.countrysite.view.CountryGridView;
+import jcp.com.exiyou.ui.destination.activity.DestinationActivity;
+import jcp.com.exiyou.ui.shoppingmall.view.MyListView;
+
+/**
+ * Created by 超鹏 on 2017/3/30.
+ * //                            _ooOoo_
+ * //                           o8888888o
+ * //                           88" . "88
+ * //                           (| -_- |)
+ * //                            O\ = /O
+ * //                        ____/`---'\____
+ * //                      .   ' \\| |// `.
+ * //                       / \\||| : |||// \
+ * //                     / _||||| -:- |||||- \
+ * //                       | | \\\ - /// | |
+ * //                     | \_| ''\---/'' | |
+ * //                      \ .-\__ `-` ___/-. /
+ * //                   ___`. .' /--.--\ `. . __
+ * //                ."" '< `.___\_<|>_/___.' >'"".
+ * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+ * //                 \ \ `-. \_ __\ /__ _/ .-` / /
+ * //         ======`-.____`-.___\_____/___.-`____.-'======
+ * //                            `=---='
+ * //         .............................................
+ * //
+ * //            佛祖镇楼                  BUG辟易
+ * 佛曰:
+ * 写字楼里写字间，写字间里程序员；程序人员写程序，又拿程序换酒钱。酒醒只在网上坐，酒醉还来网下眠；酒醉酒醒日复日，网上网下年复年。
+ * 宁愿老死程序间，只要老板多发钱；小车大房不去想，撰个二千好过年。若要见识新世面，公务员比程序员；一个在天一在地，而且还比我们闲。
+ * 别人看我穿白领，我看别人穿名牌；天生我才写程序，臀大近视肩周炎。年复一年春光度，度得他人做老板；老板扣我薄酒钱，没有酒钱怎过年。
+ * 春光逝去皱纹起，作起程序也委靡；来到水源把水灌，打死不做程序员。别人笑我忒疯癫，我笑他人命太贱；状元三百六十行，偏偏来做程序员。
+ * 但愿老死电脑间，不愿鞠躬老板前；奔驰宝马贵者趣，公交自行程序员。别人笑我忒疯癫，我笑自己命太贱；不见满街漂亮妹，哪个归得程序员。
+ * 不想只挣打工钱，那个老板愿发钱；小车大房咱要想，任我享用多悠闲。比尔能搞个微软，我咋不能捞点钱；一个在天一在地，定有一日乾坤翻。
+ * 我在天来他在地，纵横天下山水间；傲视武林豪杰墓，一樽还垒风月山。电脑面前眼发直，眼镜下面泪茫茫；做梦发财好几亿，从此不用手指忙。
+ * 哪知梦醒手空空，老板看到把我训；待到老时眼发花，走路不知哪是家。小农村里小民房，小民房里小民工；小民工人写程序，又拿代码讨赏钱。
+ * 钱空只在代码中，钱醉仍在代码间；有钱无钱日复日，码上码下年复年。但愿老死代码间，不愿鞠躬奥迪前，奥迪奔驰贵者趣，程序代码贫者缘。
+ * 若将贫贱比贫者，一在平地一在天；若将贫贱比车马，他得驱驰我得闲。别人笑我忒疯癫，我笑他人看不穿；不见盖茨两手间，财权富贵世人鉴。
+ */
+
+public class CountryActivity extends BaseActivity<CountryPresenter, CountryModel>
+        implements CountryContract.CountryView, ViewPager.OnPageChangeListener, Handler.Callback, View.OnClickListener, AdapterView.OnItemClickListener {
+    private static final String TAG = CountryActivity.class.getSimpleName();
+    private static final int VIEWPAGER_H = 100;
+    private int currentPagerIndex = 0;
+    private int size;
+    @BindView(R2.id.country_viewpager)
+    ViewPager mViewPager;
+    @BindView(R2.id.country_toolbar)
+    Toolbar toolbar;
+    @BindView(R2.id.country_book)
+    TextView country_book;
+    @BindView(R2.id.country_book_num)
+    TextView country_book_num;
+    @BindView(R2.id.country_ticket_grid)
+    CountryGridView ticketGrid;
+    @BindView(R2.id.country_hot_city_grid)
+    CountryGridView hotCityGrid;
+    @BindView(R2.id.country_hot_go_list)
+    MyListView goList;
+    @BindView(R2.id.country_guide_num)
+    CardView guideNum;
+    @BindView(R2.id.country_hot_city_card)
+    CardView hotCard;
+    @BindView(R2.id.country_card_go)
+    CardView goCard;
+    @BindView(R2.id.country_back)
+    ImageView back;
+    @BindView(R2.id.country_hot_city_more)
+    TextView moreCity;
+    private Handler mHandler = new Handler(this);
+    private int width;
+    private int city;
+    private String country;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_country;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setMV(mModel, this);
+    }
+
+    @Override
+    public void initView() {
+        city = getIntent().getIntExtra("city", 11);
+        mPresenter.CountryBean(city);
+        mViewPager.setAdapter(new CounrtryViewPagerAdapter(this, null));
+        mViewPager.addOnPageChangeListener(this);
+        ticketGrid.setAdapter(new CountryTicketAdapter(this, null, null, R.layout.country_ticket_item));
+        hotCityGrid.setAdapter(new CountryHotCityAdapter(this, null, null, R.layout.country_hot_city_item));
+        goList.setAdapter(new CountryGoAdapter(this, null, null, R.layout.country_go_item));
+        width = getResources().getDisplayMetrics().widthPixels;
+        back.setOnClickListener(this);
+        moreCity.setOnClickListener(this);
+        goList.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void retrunList(CountrySiteBean countrySiteBean) {
+//      Log.e(TAG, "retrunList: "+countrySiteBean.getData().getId()+"  "+countrySiteBean.getData().getPhotos() );
+        mPresenter.CountryPager(getResources().getDisplayMetrics().widthPixels,
+                mViewPager.getLayoutParams().height, this, countrySiteBean);
+        //数据源
+        ((CountryTicketAdapter) ticketGrid.getAdapter()).updateRes(countrySiteBean.getData().getIcon_list());
+        ((CountryHotCityAdapter) hotCityGrid.getAdapter()).updateRes(countrySiteBean.getData().getHot_city());
+        ((CountryGoAdapter) goList.getAdapter()).updateRes(countrySiteBean.getData().getNew_discount());
+//        title.setText(countrySiteBean.getData().getCnname());
+//        subTitle.setText(countrySiteBean.getData().getEnname());
+        country = countrySiteBean.getData().getCnname();
+        toolbar.setTitle(country);
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setSubtitle(countrySiteBean.getData().getEnname());
+        setSupportActionBar(toolbar);
+        int guide_num = countrySiteBean.getData().getGuide_num();
+        if (guide_num > 0) {
+            guideNum.setVisibility(View.VISIBLE);
+            country_book.setText(country + "锦囊");
+            country_book_num.setText("全部" + guide_num + "本");
+        } else {
+            guideNum.setVisibility(View.GONE);
+        }
+        if (countrySiteBean.getData().getNew_discount().size() > 0) {
+            goCard.setVisibility(View.VISIBLE);
+        } else {
+            goCard.setVisibility(View.GONE);
+        }
+        if (countrySiteBean.getData().getHot_city().size() > 0) {
+            hotCard.setVisibility(View.VISIBLE);
+        } else {
+            hotCard.setVisibility(View.GONE);
+        }
+//        更改gridview高度 没有生效 采用固定高度
+//        View view = LayoutInflater.from(this).inflate(R.layout.country_ticket_item, null);
+//        LinearLayout ticketLinear = (LinearLayout) view.findViewById(R.id.country_ticket_lin);
+//        int height = ticketLinear.getLayoutParams().height;
+////        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+////        params.height = height * (countrySiteBean.getData().getIcon_list().size() / 4);
+////        params.width = width;
+////        ticketGrid.setLayoutParams(params);
+//        ticketGrid.getLayoutParams().height= height * (countrySiteBean.getData().getIcon_list().size() / 4);
+//        ticketLinear.getLayoutParams().width=width;
+
+    }
+
+    @Override
+    public void returnViewPager(List<ImageView> list) {
+        size = list.size();
+        ((CounrtryViewPagerAdapter) mViewPager.getAdapter()).upDate(list);
+        mHandler.sendEmptyMessage(VIEWPAGER_H);
+
+    }
+
+    @Override
+    public void OnStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
+
+    @Override
+    public boolean handleMessage(Message message) {
+        switch (message.what) {
+            case VIEWPAGER_H:
+                mViewPager.setCurrentItem(currentPagerIndex % size, false);
+                currentPagerIndex++;
+                mHandler.sendEmptyMessageDelayed(VIEWPAGER_H, 2500);
+                break;
+        }
+        return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.country_back:
+                finish();
+                break;
+            case R.id.country_hot_city_more:
+                Intent intent = new Intent(this, CountryMoreCityActivity.class);
+                intent.putExtra("name",country);
+                intent.putExtra("id",city);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(this, DestinationActivity.class);
+        intent.putExtra("url", HttpParams.COUNTRY_SITE_URL+ ((CountryGoAdapter) goList.getAdapter()).getItem(i).getId());
+        startActivity(intent);
+    }
+}

@@ -1,0 +1,77 @@
+package jcp.com.exiyou.ui.shoppingmall.fragment;
+
+import android.util.Log;
+import android.widget.GridView;
+
+import butterknife.BindView;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseFragment;
+import jcp.com.exiyou.ui.shoppingmall.adapter.ShopGridViewAdapter;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopBean;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopListBean;
+import jcp.com.exiyou.ui.shoppingmall.contract.ShopContract;
+import jcp.com.exiyou.ui.shoppingmall.model.ShopModel;
+import jcp.com.exiyou.ui.shoppingmall.presenter.ShopPresenter;
+
+/**
+ * Created by 周强 on 2017/3/27.
+ */
+
+public class ShopFragment extends BaseFragment<ShopPresenter,ShopModel> implements ShopContract.ShopView{
+
+    private static final String TAG = ShopFragment.class.getSimpleName();
+
+    @BindView(R2.id.fragment_shoppage_gridview)
+    GridView mGridView;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_shoppage;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setMV(mModel,this);
+        Log.e(TAG, "---getShopBeanData: 发送请求给presenter" );
+        mPresenter.getShopRes();
+    }
+
+    @Override
+    public void initView() {
+        getShopBeanData();
+    }
+
+    private void getShopBeanData() {
+
+    }
+
+    @Override
+    public void OnStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
+    }
+
+    ShopBean shopData = new ShopBean();
+    @Override
+    public void returnShopData(ShopListBean data) {
+
+        shopData = data.getData();
+        ShopGridViewAdapter adapter = new ShopGridViewAdapter(getActivity(), shopData.getHot_goods());
+        Log.e(TAG, "returnShopData: "+ adapter );
+        mGridView.setAdapter(adapter);
+
+    }
+
+
+
+}

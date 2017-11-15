@@ -1,0 +1,60 @@
+package jcp.com.exiyou.ui.shoppingmall.fragment;
+
+import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import butterknife.BindView;
+import jcp.com.exiyou.R;
+import jcp.com.exiyou.R2;
+import jcp.com.exiyou.base.base.BaseFragment;
+import jcp.com.exiyou.ui.shoppingmall.activity.ShopWebViewIdDetails;
+import jcp.com.exiyou.ui.shoppingmall.adapter.ShopSearchSecondAdapter;
+import jcp.com.exiyou.ui.shoppingmall.bean.ShopSearchSecondListBean;
+
+/**
+ * Created by 周强 on 2017/3/31.
+ */
+
+public class ShopSearchSecondMessageFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+
+    @BindView(R2.id.shoppage_search_second_listview)
+    ListView mListView;
+
+    private ShopSearchSecondListBean data;
+
+    public void setData(ShopSearchSecondListBean data){
+        this.data = data;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.shoppage_search_second_messagerecycler;
+    }
+
+    @Override
+    public void initPresenter() {
+
+    }
+
+    private ShopSearchSecondAdapter adapter;
+
+    @Override
+   public void initView() {
+
+        adapter = new ShopSearchSecondAdapter(getActivity(),null,data.getData().getList(),R.layout.shoppage_search_list_item);
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(this);
+
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getActivity(), ShopWebViewIdDetails.class);
+        intent.putExtra("url",data.getData().getList().get(position).getUrl() );
+        intent.putExtra("type", "2");
+        getActivity().startActivity(intent);
+    }
+}

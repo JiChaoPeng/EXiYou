@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/country_go_image"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:layout_weight="2" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/country_go_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="5"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/country_go_zhekou"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:textColor="#f00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/country_go_money"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="17sp"
+                android:textColor="#f00" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:text="元起"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:textColor="#f00" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

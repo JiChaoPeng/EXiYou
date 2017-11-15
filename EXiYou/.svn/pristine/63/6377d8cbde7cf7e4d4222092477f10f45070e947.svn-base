@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shoppage_special_listitem"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="15dp">
+
+    <ImageView
+        android:id="@+id/shoppage_special_listitem_image"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/shoppage_special_listitem_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="全国联运欧洲多国7-13天含税机票+1晚酒店(国航直飞+北京往返+赠欧洲多城市ChicOutlet9折打折卡)"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/shoppage_special_listitem_sold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="8dp"
+            android:text="已售13件"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/shoppage_special_listitem_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="8dp"
+            android:text="元起"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/shoppage_special_listitem_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="6dp"
+            android:layout_toLeftOf="@id/shoppage_special_listitem_text"
+            android:text="1199"
+            android:textColor="#f45858"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+</LinearLayout>

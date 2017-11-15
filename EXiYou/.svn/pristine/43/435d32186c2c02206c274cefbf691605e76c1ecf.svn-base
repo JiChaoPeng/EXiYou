@@ -1,0 +1,18 @@
+package jcp.com.exiyou.ui.community.bean.enterintojump;
+
+/**
+ * Created by SweetDream on 2017/3/30.
+ */
+
+public class ItemBean {
+
+    private ItemDataBean data;
+
+    public ItemDataBean getData() {
+        return data;
+    }
+
+    public void setData(ItemDataBean data) {
+        this.data = data;
+    }
+}
